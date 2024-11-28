@@ -1,0 +1,14 @@
+/* Estilo base del botón */
+.button {
+    -fx-background-color:  #61449E;
+    -fx-text-fill: #FFFFFF; /* Texto blanco */
+    -fx-background-radius: 0px; /* Bordes redondeados opcionales */
+    -fx-border-radius: 0px;
+   -fx-transition: background-color 0.5s ease, -fx-effect 0.5s ease; /* Transición suave */
+}
+
+/* Estilo cuando se pasa el cursor sobre el botón */
+.button:hover {
+    -fx-background-color: #92449E;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0, 0, 1); /* Sombra más pronunciada */
+}

@@ -1,0 +1,18 @@
+.button{
+    -fx-background-color:  #61449E;
+    -fx-background-radius: 25 25 25 25;
+    margin-left: 20px;
+    margin-left: 20px;
+}
+.button-peligroso{
+     -fx-transition: background-color 0.5s ease, -fx-effect 0.5s ease;
+    -fx-background-radius: 25 25 25 25;
+}
+.button-peligroso:hover{
+    -fx-background-color: #FF0000;
+    -fx-background-radius: 25 25 25 25;
+}
+
+.button:hover {
+    -fx-background-color: #92449E;
+}

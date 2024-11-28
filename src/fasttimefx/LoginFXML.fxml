@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.LoginFXMLController">
+   <children>
+      <ImageView fitHeight="570.0" fitWidth="570.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../img/login.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="749.0" layoutY="162.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="543.0" prefWidth="413.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="590.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <ImageView fitHeight="113.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Logo.png" />
+               </image>
+            </ImageView>
+            <Label text="Correo">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="ErrorCorreo" alignment="TOP_LEFT" prefHeight="22.0" prefWidth="382.0" textAlignment="JUSTIFY" textFill="RED" textOverrun="CENTER_ELLIPSIS" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfCorreo" promptText="Usuario@timefast.com">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="16.0" right="16.0" />
+               </VBox.margin></TextField>
+            <Label styleClass="etiquetas" stylesheets="@../Estilos/EstilosLabels.css" text="Contraseña">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" />
+               </VBox.margin></Label>
+            <Label fx:id="ErrorContraseña" alignment="TOP_LEFT" prefHeight="22.0" prefWidth="382.0" textAlignment="JUSTIFY" textFill="RED" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="tfPassword" promptText="........">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" left="16.0" right="16.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></PasswordField>
+            <Button fx:id="btnLogin" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickIngresar" prefHeight="34.0" prefWidth="383.0" stylesheets="@../Estilos/EstilosBotones.css" text="Button" textFill="WHITE" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Rockwell" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="16.0" right="16.0" top="25.0" />
+               </VBox.margin>
+            </Button>
+         </children></VBox>
+   </children>
+</AnchorPane>
