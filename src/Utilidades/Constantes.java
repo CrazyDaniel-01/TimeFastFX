@@ -12,5 +12,5 @@ package Utilidades;
 public class Constantes {
     public static final Integer ERROR_URL=2501;
     public static final Integer ERROR_PETICION=1002;
-    public static final String URL_WS = "http://localhost:8084/WSComoQuieran/api/";
+    public static final String URL_WS = "http://localhost:8084/WSFastTime/ws/";
 }

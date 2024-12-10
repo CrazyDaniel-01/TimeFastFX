@@ -98,7 +98,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView layoutX="14.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
+            <TableView fx:id="tvUnidad" layoutX="14.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Marca" />
                 <TableColumn prefWidth="75.0" text="Modelo" />
@@ -153,7 +153,7 @@
                   <Insets top="16.0" />
                </padding>
             </HBox>
-            <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
+            <TableView fx:id="tvEnvios" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Cliente" />
                 <TableColumn prefWidth="75.0" text="Origen" />
@@ -208,7 +208,7 @@
                   <Insets top="16.0" />
                </padding>
             </HBox>
-            <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
+            <TableView fx:id="tvPaquetes" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Numero de Guia" />
                 <TableColumn prefWidth="75.0" text="Descripcion" />
@@ -263,7 +263,7 @@
                   <Insets top="16.0" />
                </padding>
             </HBox>
-            <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
+            <TableView fx:id="tvCliente" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Nombre" />
                 <TableColumn prefWidth="75.0" text="Apellido Paterno" />
@@ -321,7 +321,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView prefHeight="607.0" prefWidth="1259.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
+            <TableView fx:id="tvColaborador" prefHeight="607.0" prefWidth="1259.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
               <columns>
                   <TableColumn prefWidth="75.0" text="Fotografia" />
                 <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />

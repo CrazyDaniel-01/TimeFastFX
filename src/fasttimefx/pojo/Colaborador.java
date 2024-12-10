@@ -13,20 +13,20 @@ import java.util.List;
  * @author Daniel
  */
 public class Colaborador {
-    private String nombre;
-    private Integer idColaborador;
-    private Integer idRol;
-    private String apellidoMaterno;
-    private String apellidoPaterno;
-    private String fechaNacimiento;
-    private String noPersonal;
-    private String telefono;
-    private Integer peso;
-    private Integer estatura;
-    private String correo;
-    private String rfc;
-    private String curp;
-    private String password;
+    private String Nombre;
+    private Integer IdColaborador;
+    private Integer IdRol;
+    private String ApellidoMaterno;
+    private String ApellidoPaterno;
+    private String FechaNacimiento;
+    private String NoPersonal;
+    private String Telefono;
+    private Integer Peso;
+    private Integer Estatura;
+    private String Correo;
+    private String Rfc;
+    private String Curp;
+    private String Password;
     
 
     public String getRol() {
@@ -50,132 +50,132 @@ public class Colaborador {
    
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public Integer getIdColaborador() {
-        return idColaborador;
+        return IdColaborador;
     }
 
-    public void setIdColaborador(Integer idColaborador) {
-        this.idColaborador = idColaborador;
+    public void setIdColaborador(Integer IdColaborador) {
+        this.IdColaborador = IdColaborador;
     }
 
     public Integer getIdRol() {
-        return idRol;
+        return IdRol;
     }
 
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
+    public void setIdRol(Integer IdRol) {
+        this.IdRol = IdRol;
     }
 
     public String getApellidoMaterno() {
-        return apellidoMaterno;
+        return ApellidoMaterno;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public void setApellidoMaterno(String ApellidoMaterno) {
+        this.ApellidoMaterno = ApellidoMaterno;
     }
 
     public String getApellidoPaterno() {
-        return apellidoPaterno;
+        return ApellidoPaterno;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+    public void setApellidoPaterno(String ApellidoPaterno) {
+        this.ApellidoPaterno = ApellidoPaterno;
     }
 
     public String getFechaNacimiento() {
-        return fechaNacimiento;
+        return FechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFechaNacimiento(String FechaNacimiento) {
+        this.FechaNacimiento = FechaNacimiento;
     }
 
     public String getNumPersonal() {
-        return noPersonal;
+        return NoPersonal;
     }
 
-    public void setNumPersonal(String numPersonal) {
-        this.noPersonal = numPersonal;
+    public void setNumPersonal(String NoPersonal) {
+        this.NoPersonal = NoPersonal;
     }
 
     public String getTelefono() {
-        return telefono;
+        return Telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
     }
 
     public Integer getPeso() {
-        return peso;
+        return Peso;
     }
 
-    public void setPeso(Integer peso) {
-        this.peso = peso;
+    public void setPeso(Integer Peso) {
+        this.Peso = Peso;
     }
 
     public Integer getEstatura() {
-        return estatura;
+        return Estatura;
     }
 
-    public void setEstatura(Integer estatura) {
-        this.estatura = estatura;
+    public void setEstatura(Integer Estatura) {
+        this.Estatura = Estatura;
     }
 
     public String getCorreo() {
-        return correo;
+        return Correo;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreo(String Correo) {
+        this.Correo = Correo;
     }
 
     public String getRfc() {
-        return rfc;
+        return Rfc;
     }
 
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
+    public void setRfc(String Rfc) {
+        this.Rfc = Rfc;
     }
 
     public String getCurp() {
-        return curp;
+        return Curp;
     }
 
-    public void setCurp(String curp) {
-        this.curp = curp;
+    public void setCurp(String Curp) {
+        this.Curp = Curp;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String Password) {
+        this.Password = Password;
     }
 
-    public Colaborador(String nombre, Integer idColaborador, Integer idRol, String apellidoMaterno, String apellidoPaterno, String fechaNacimiento, String noPersonal, String telefono, Integer peso, Integer estatura, String correo, String rfc, String curp, String password) {
-        this.nombre = nombre;
-        this.idColaborador = idColaborador;
-        this.idRol = idRol;
-        this.apellidoMaterno = apellidoMaterno;
-        this.apellidoPaterno = apellidoPaterno;
-        this.fechaNacimiento = fechaNacimiento;
-        this.noPersonal = noPersonal;
-        this.telefono = telefono;
-        this.peso = peso;
-        this.estatura = estatura;
-        this.correo = correo;
-        this.rfc = rfc;
-        this.curp = curp;
-        this.password = password;
+    public Colaborador(String Nombre, Integer IdColaborador, Integer IdRol, String ApellidoMaterno, String ApellidoPaterno, String FechaNacimiento, String NoPersonal, String Telefono, Integer Peso, Integer Estatura, String Correo, String Rfc, String Curp, String Password) {
+        this.Nombre = Nombre;
+        this.IdColaborador = IdColaborador;
+        this.IdRol = IdRol;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.FechaNacimiento = FechaNacimiento;
+        this.NoPersonal = NoPersonal;
+        this.Telefono = Telefono;
+        this.Peso = Peso;
+        this.Estatura = Estatura;
+        this.Correo = Correo;
+        this.Rfc = Rfc;
+        this.Curp = Curp;
+        this.Password = Password;
     }
 
     public  Colaborador() {

@@ -17,10 +17,10 @@ import java.net.HttpURLConnection;
  * @author Daniel
  */
 public class LoginDAO {
-    public static Login iniciarSesion(String numPersonal, String password){
+    public static Login iniciarSesion(String NoPersonal, String Password){
         Login respuestaLogin = new Login();
         String urlServicio =Constantes.URL_WS+"login/colaborador";
-        String parametros = String.format("numPersonal=%s&password=%s",numPersonal,password);
+        String parametros = String.format("NoPersonal=%s&Password=%s",NoPersonal,Password);
         RespuestaHTTP respuestaWS = ConexionWS.peticionPOST(urlServicio, parametros);
         if(respuestaWS.getCodigoRespuesta()== HttpURLConnection.HTTP_OK){
             System.out.println("JSON "+respuestaWS.getContenido());
