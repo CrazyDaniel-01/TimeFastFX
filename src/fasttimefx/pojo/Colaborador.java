@@ -9,25 +9,116 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * POJO actualizado para representar un Colaborador.
  *
  * @author Daniel
  */
 public class Colaborador {
-    private String Nombre;
-    private Integer IdColaborador;
-    private Integer IdRol;
-    private String ApellidoMaterno;
-    private String ApellidoPaterno;
-    private String FechaNacimiento;
-    private String NoPersonal;
-    private String Telefono;
-    private Integer Peso;
-    private Integer Estatura;
-    private String Correo;
-    private String Rfc;
-    private String Curp;
-    private String Password;
-    
+    private Integer idColaborador;
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String curp;
+    private String correo;
+    private String password;
+    private Integer idRol;
+    private String rol;
+    private String fotoBase64;
+    private String noLicencia;
+    private String noPersonal;
+    private Integer idConductor;
+    private String numeroLicencia;
+
+    // Lista adicional de colaboradores (si es necesario para relaciones o lógica interna)
+    private List<Colaborador> colaboradores;
+
+    public Colaborador() {
+        this.colaboradores = new ArrayList<>();
+    }
+
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno,
+                        String curp, String correo, String password, Integer idRol, String rol, String fotoBase64,
+                        String noLicencia, String noPersonal, Integer idConductor, String numeroLicencia) {
+        this.idColaborador = idColaborador;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.curp = curp;
+        this.correo = correo;
+        this.password = password;
+        this.idRol = idRol;
+        this.rol = rol;
+        this.fotoBase64 = fotoBase64;
+        this.noLicencia = noLicencia;
+        this.noPersonal = noPersonal;
+        this.idConductor = idConductor;
+        this.numeroLicencia = numeroLicencia;
+        this.colaboradores = new ArrayList<>();
+    }
+
+    public Integer getIdColaborador() {
+        return idColaborador;
+    }
+
+    public void setIdColaborador(Integer idColaborador) {
+        this.idColaborador = idColaborador;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Integer idRol) {
+        this.idRol = idRol;
+    }
 
     public String getRol() {
         return rol;
@@ -36,150 +127,52 @@ public class Colaborador {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    private String rol;
-    private List<Colaborador> colaboradores;
 
- 
-    public void setColaboradores(List<Colaborador> colaboradores) {
-        this.colaboradores = colaboradores;
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
+    }
+
+    public String getNoLicencia() {
+        return noLicencia;
+    }
+
+    public void setNoLicencia(String noLicencia) {
+        this.noLicencia = noLicencia;
+    }
+
+    public String getNoPersonal() {
+        return noPersonal;
+    }
+
+    public void setNoPersonal(String noPersonal) {
+        this.noPersonal = noPersonal;
+    }
+
+    public Integer getIdConductor() {
+        return idConductor;
+    }
+
+    public void setIdConductor(Integer idConductor) {
+        this.idConductor = idConductor;
+    }
+
+    public String getNumeroLicencia() {
+        return numeroLicencia;
+    }
+
+    public void setNumeroLicencia(String numeroLicencia) {
+        this.numeroLicencia = numeroLicencia;
     }
 
     public List<Colaborador> getColaboradores() {
         return colaboradores;
     }
-   
 
-    public String getNombre() {
-        return Nombre;
+    public void setColaboradores(List<Colaborador> colaboradores) {
+        this.colaboradores = colaboradores;
     }
-
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
-    }
-
-    public Integer getIdColaborador() {
-        return IdColaborador;
-    }
-
-    public void setIdColaborador(Integer IdColaborador) {
-        this.IdColaborador = IdColaborador;
-    }
-
-    public Integer getIdRol() {
-        return IdRol;
-    }
-
-    public void setIdRol(Integer IdRol) {
-        this.IdRol = IdRol;
-    }
-
-    public String getApellidoMaterno() {
-        return ApellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String ApellidoMaterno) {
-        this.ApellidoMaterno = ApellidoMaterno;
-    }
-
-    public String getApellidoPaterno() {
-        return ApellidoPaterno;
-    }
-
-    public void setApellidoPaterno(String ApellidoPaterno) {
-        this.ApellidoPaterno = ApellidoPaterno;
-    }
-
-    public String getFechaNacimiento() {
-        return FechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String FechaNacimiento) {
-        this.FechaNacimiento = FechaNacimiento;
-    }
-
-    public String getNumPersonal() {
-        return NoPersonal;
-    }
-
-    public void setNumPersonal(String NoPersonal) {
-        this.NoPersonal = NoPersonal;
-    }
-
-    public String getTelefono() {
-        return Telefono;
-    }
-
-    public void setTelefono(String Telefono) {
-        this.Telefono = Telefono;
-    }
-
-    public Integer getPeso() {
-        return Peso;
-    }
-
-    public void setPeso(Integer Peso) {
-        this.Peso = Peso;
-    }
-
-    public Integer getEstatura() {
-        return Estatura;
-    }
-
-    public void setEstatura(Integer Estatura) {
-        this.Estatura = Estatura;
-    }
-
-    public String getCorreo() {
-        return Correo;
-    }
-
-    public void setCorreo(String Correo) {
-        this.Correo = Correo;
-    }
-
-    public String getRfc() {
-        return Rfc;
-    }
-
-    public void setRfc(String Rfc) {
-        this.Rfc = Rfc;
-    }
-
-    public String getCurp() {
-        return Curp;
-    }
-
-    public void setCurp(String Curp) {
-        this.Curp = Curp;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
-
-    public Colaborador(String Nombre, Integer IdColaborador, Integer IdRol, String ApellidoMaterno, String ApellidoPaterno, String FechaNacimiento, String NoPersonal, String Telefono, Integer Peso, Integer Estatura, String Correo, String Rfc, String Curp, String Password) {
-        this.Nombre = Nombre;
-        this.IdColaborador = IdColaborador;
-        this.IdRol = IdRol;
-        this.ApellidoMaterno = ApellidoMaterno;
-        this.ApellidoPaterno = ApellidoPaterno;
-        this.FechaNacimiento = FechaNacimiento;
-        this.NoPersonal = NoPersonal;
-        this.Telefono = Telefono;
-        this.Peso = Peso;
-        this.Estatura = Estatura;
-        this.Correo = Correo;
-        this.Rfc = Rfc;
-        this.Curp = Curp;
-        this.Password = Password;
-    }
-
-    public  Colaborador() {
-        this.colaboradores = new ArrayList<>();
-    }
-
 }

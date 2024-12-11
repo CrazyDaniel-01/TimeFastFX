@@ -1,11 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.FormularioColaboradorFXMLController">
-    
-</AnchorPane>
+<VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f4f4f4; -fx-padding: 20; -fx-pref-width: 1920; -fx-pref-height: 720;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Formulario de Colaborador" />
+   
+       <GridPane hgap="10" style="-fx-max-width: 1500;" vgap="10">
+           <columnConstraints>
+               <ColumnConstraints halignment="RIGHT" minWidth="150.0" />
+               <ColumnConstraints hgrow="ALWAYS" minWidth="300.0" />
+           </columnConstraints>
+      <children>
+      
+              <!-- Nombre -->
+              <Label text="Nombre:" GridPane.rowIndex="1" />
+              <TextField fx:id="nombreField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      
+              <!-- Apellido Paterno -->
+              <Label text="Apellido Paterno:" GridPane.rowIndex="2" />
+              <TextField fx:id="apellidoPaternoField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      
+              <!-- Apellido Materno -->
+              <Label text="Apellido Materno:" GridPane.rowIndex="3" />
+              <TextField fx:id="apellidoMaternoField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      
+              <!-- CURP -->
+              <Label text="CURP:" GridPane.rowIndex="4" />
+              <TextField fx:id="curpField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      
+              <!-- Correo -->
+              <Label text="Correo:" GridPane.rowIndex="5" />
+              <TextField fx:id="correoField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      
+              <!-- Password -->
+              <Label text="Password:" GridPane.rowIndex="6" />
+              <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      
+              <!-- Rol -->
+              <Label text="Rol:" GridPane.rowIndex="8" />
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      
+              <!-- Foto Base64 -->
+              <Label text="Foto " GridPane.rowIndex="9" />
+              <TextField fx:id="fotoBase64Field" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      
+              <!-- No Licencia -->
+              <Label text="No Licencia:" GridPane.rowIndex="10" />
+              <TextField fx:id="noLicenciaField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      
+              <!-- No Personal -->
+              <Label text="No Personal:" GridPane.rowIndex="11" />
+              <TextField fx:id="noPersonalField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+      
+              <!-- Numero Licencia -->
+              <Label text="Numero Licencia:" GridPane.rowIndex="13" />
+              <TextField fx:id="numeroLicenciaField" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+      </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+       </GridPane>
+   
+       <Button style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-padding: 10 20;" text="Guardar" />
+   </children>
+</VBox>

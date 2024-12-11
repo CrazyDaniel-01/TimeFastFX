@@ -5,123 +5,133 @@
  */
 package fasttimefx.pojo;
 
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * POJO actualizado para representar un Paquete.
  *
  * @author afs30
  */
 public class Paquete {
-    private Integer IdPaquete;
-    private String NumeroGuia;
-    private String DescripcionPaquete;
-    private Float Peso;
-    private String Dimensiones;
-    private Float Alto;
-    private Float Ancho;
-    private Float Profundidad;
-    private Integer IdEnvio;
-    private String Envio;
-   
+    private Integer idPaquete;
+    private String numeroGuia;
+    private String descripcionPaquete;
+    private Float peso;
+    private String dimensiones;
+    private Float alto;
+    private Float ancho;
+    private Float profundidad;
+    private Integer idEnvio;
+    private String envio;
+
+    // Lista adicional de paquetes relacionados (si es necesario para lógica interna)
+    private List<Paquete> paquetesRelacionados;
 
     public Paquete() {
+        this.paquetesRelacionados = new ArrayList<>();
     }
 
-    public Paquete(Integer IdPaquete, String NumeroGuia, String DescripcionPaquete, Float Peso, String Dimensiones, Float Alto, Float Ancho, Float Profundidad, Integer IdEnvio, String Envio) {
-        this.IdPaquete = IdPaquete;
-        this.NumeroGuia = NumeroGuia;
-        this.DescripcionPaquete = DescripcionPaquete;
-        this.Peso = Peso;
-        this.Dimensiones = Dimensiones;
-        this.Alto = Alto;
-        this.Ancho = Ancho;
-        this.Profundidad = Profundidad;
-        this.IdEnvio = IdEnvio;
-        this.Envio = Envio;
+    public Paquete(Integer idPaquete, String numeroGuia, String descripcionPaquete, Float peso, String dimensiones,
+                   Float alto, Float ancho, Float profundidad, Integer idEnvio, String envio) {
+        this.idPaquete = idPaquete;
+        this.numeroGuia = numeroGuia;
+        this.descripcionPaquete = descripcionPaquete;
+        this.peso = peso;
+        this.dimensiones = dimensiones;
+        this.alto = alto;
+        this.ancho = ancho;
+        this.profundidad = profundidad;
+        this.idEnvio = idEnvio;
+        this.envio = envio;
+        this.paquetesRelacionados = new ArrayList<>();
     }
 
     public Integer getIdPaquete() {
-        return IdPaquete;
+        return idPaquete;
     }
 
-    public void setIdPaquete(Integer IdPaquete) {
-        this.IdPaquete = IdPaquete;
+    public void setIdPaquete(Integer idPaquete) {
+        this.idPaquete = idPaquete;
     }
 
     public String getNumeroGuia() {
-        return NumeroGuia;
+        return numeroGuia;
     }
 
-    public void setNumeroGuia(String NumeroGuia) {
-        this.NumeroGuia = NumeroGuia;
+    public void setNumeroGuia(String numeroGuia) {
+        this.numeroGuia = numeroGuia;
     }
 
     public String getDescripcionPaquete() {
-        return DescripcionPaquete;
+        return descripcionPaquete;
     }
 
-    public void setDescripcionPaquete(String DescripcionPaquete) {
-        this.DescripcionPaquete = DescripcionPaquete;
+    public void setDescripcionPaquete(String descripcionPaquete) {
+        this.descripcionPaquete = descripcionPaquete;
     }
 
     public Float getPeso() {
-        return Peso;
+        return peso;
     }
 
-    public void setPeso(Float Peso) {
-        this.Peso = Peso;
+    public void setPeso(Float peso) {
+        this.peso = peso;
     }
 
     public String getDimensiones() {
-        return Dimensiones;
+        return dimensiones;
     }
 
-    public void setDimensiones(String Dimensiones) {
-        this.Dimensiones = Dimensiones;
+    public void setDimensiones(String dimensiones) {
+        this.dimensiones = dimensiones;
     }
 
     public Float getAlto() {
-        return Alto;
+        return alto;
     }
 
-    public void setAlto(Float Alto) {
-        this.Alto = Alto;
+    public void setAlto(Float alto) {
+        this.alto = alto;
     }
 
     public Float getAncho() {
-        return Ancho;
+        return ancho;
     }
 
-    public void setAncho(Float Ancho) {
-        this.Ancho = Ancho;
+    public void setAncho(Float ancho) {
+        this.ancho = ancho;
     }
 
     public Float getProfundidad() {
-        return Profundidad;
+        return profundidad;
     }
 
-    public void setProfundidad(Float Profundidad) {
-        this.Profundidad = Profundidad;
+    public void setProfundidad(Float profundidad) {
+        this.profundidad = profundidad;
     }
 
     public Integer getIdEnvio() {
-        return IdEnvio;
+        return idEnvio;
     }
 
-    public void setIdEnvio(Integer IdEnvio) {
-        this.IdEnvio = IdEnvio;
+    public void setIdEnvio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
     }
 
     public String getEnvio() {
-        return Envio;
+        return envio;
     }
 
-    public void setEnvio(String Envio) {
-        this.Envio = Envio;
+    public void setEnvio(String envio) {
+        this.envio = envio;
     }
 
-    
+    public List<Paquete> getPaquetesRelacionados() {
+        return paquetesRelacionados;
+    }
 
-    
-    
+    public void setPaquetesRelacionados(List<Paquete> paquetesRelacionados) {
+        this.paquetesRelacionados = paquetesRelacionados;
+    }
 }
