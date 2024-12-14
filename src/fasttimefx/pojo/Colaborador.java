@@ -9,52 +9,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * POJO actualizado para representar un Colaborador.
  *
  * @author Daniel
  */
 public class Colaborador {
-    private String nombre;
     private Integer idColaborador;
-    private Integer idRol;
-    private String apellidoMaterno;
+    private String nombre;
     private String apellidoPaterno;
-    private String fechaNacimiento;
-    private String noPersonal;
-    private String telefono;
-    private Integer peso;
-    private Integer estatura;
-    private String correo;
-    private String rfc;
+    private String apellidoMaterno;
     private String curp;
+    private String correo;
     private String password;
-    
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
+    private Integer idRol;
     private String rol;
+    private String fotoBase64;
+    private String noLicencia;
+    private String noPersonal;
+    private Integer idConductor;
+    private String numeroLicencia;
+
+    // Lista adicional de colaboradores (si es necesario para relaciones o lógica interna)
     private List<Colaborador> colaboradores;
 
- 
-    public void setColaboradores(List<Colaborador> colaboradores) {
-        this.colaboradores = colaboradores;
+    public Colaborador() {
+        this.colaboradores = new ArrayList<>();
     }
 
-    public List<Colaborador> getColaboradores() {
-        return colaboradores;
-    }
-   
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno,
+                        String curp, String correo, String password, Integer idRol, String rol, String fotoBase64,
+                        String noLicencia, String noPersonal, Integer idConductor, String numeroLicencia) {
+        this.idColaborador = idColaborador;
         this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.curp = curp;
+        this.correo = correo;
+        this.password = password;
+        this.idRol = idRol;
+        this.rol = rol;
+        this.fotoBase64 = fotoBase64;
+        this.noLicencia = noLicencia;
+        this.noPersonal = noPersonal;
+        this.idConductor = idConductor;
+        this.numeroLicencia = numeroLicencia;
+        this.colaboradores = new ArrayList<>();
     }
 
     public Integer getIdColaborador() {
@@ -65,20 +64,12 @@ public class Colaborador {
         this.idColaborador = idColaborador;
     }
 
-    public Integer getIdRol() {
-        return idRol;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellidoPaterno() {
@@ -89,60 +80,12 @@ public class Colaborador {
         this.apellidoPaterno = apellidoPaterno;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getNumPersonal() {
-        return noPersonal;
-    }
-
-    public void setNumPersonal(String numPersonal) {
-        this.noPersonal = numPersonal;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public Integer getPeso() {
-        return peso;
-    }
-
-    public void setPeso(Integer peso) {
-        this.peso = peso;
-    }
-
-    public Integer getEstatura() {
-        return estatura;
-    }
-
-    public void setEstatura(Integer estatura) {
-        this.estatura = estatura;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getRfc() {
-        return rfc;
-    }
-
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getCurp() {
@@ -153,6 +96,14 @@ public class Colaborador {
         this.curp = curp;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -161,25 +112,67 @@ public class Colaborador {
         this.password = password;
     }
 
-    public Colaborador(String nombre, Integer idColaborador, Integer idRol, String apellidoMaterno, String apellidoPaterno, String fechaNacimiento, String noPersonal, String telefono, Integer peso, Integer estatura, String correo, String rfc, String curp, String password) {
-        this.nombre = nombre;
-        this.idColaborador = idColaborador;
+    public Integer getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
-        this.apellidoMaterno = apellidoMaterno;
-        this.apellidoPaterno = apellidoPaterno;
-        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
+    }
+
+    public String getNoLicencia() {
+        return noLicencia;
+    }
+
+    public void setNoLicencia(String noLicencia) {
+        this.noLicencia = noLicencia;
+    }
+
+    public String getNoPersonal() {
+        return noPersonal;
+    }
+
+    public void setNoPersonal(String noPersonal) {
         this.noPersonal = noPersonal;
-        this.telefono = telefono;
-        this.peso = peso;
-        this.estatura = estatura;
-        this.correo = correo;
-        this.rfc = rfc;
-        this.curp = curp;
-        this.password = password;
     }
 
-    public  Colaborador() {
-        this.colaboradores = new ArrayList<>();
+    public Integer getIdConductor() {
+        return idConductor;
     }
 
+    public void setIdConductor(Integer idConductor) {
+        this.idConductor = idConductor;
+    }
+
+    public String getNumeroLicencia() {
+        return numeroLicencia;
+    }
+
+    public void setNumeroLicencia(String numeroLicencia) {
+        this.numeroLicencia = numeroLicencia;
+    }
+
+    public List<Colaborador> getColaboradores() {
+        return colaboradores;
+    }
+
+    public void setColaboradores(List<Colaborador> colaboradores) {
+        this.colaboradores = colaboradores;
+    }
 }

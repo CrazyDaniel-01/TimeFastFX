@@ -58,8 +58,8 @@ public class LoginFXMLController implements Initializable {
         }
         
     }
-    private void verificarCredenciales(String numPersonal, String password){
-        Login respuestaLogin = LoginDAO.iniciarSesion(numPersonal, password);
+    private void verificarCredenciales(String NoPersonal, String Password){
+        Login respuestaLogin = LoginDAO.iniciarSesion(NoPersonal, Password);
         if(!respuestaLogin.getError()){
             
             Utilidades.mostrarNotificacion("Bienvenido", "Bienvenido(a) a gymfort", Alert.AlertType.INFORMATION);
@@ -72,15 +72,15 @@ public class LoginFXMLController implements Initializable {
        
     }
     
-    private boolean validarCampos(String correo, String password){
+    private boolean validarCampos(String NoPersonal, String Password){
         boolean camposValidos=true;
         ErrorContraseña.setText("");
         ErrorCorreo.setText("");
-        if(correo.isEmpty()){
+        if(NoPersonal.isEmpty()){
             camposValidos=false;
             ErrorCorreo.setText("Numero de Personal Obligatorio");
             }
-        if(password.isEmpty()){
+        if(Password.isEmpty()){
             camposValidos=false;
             ErrorContraseña.setText("Contraseña Obligatorio");
             }
