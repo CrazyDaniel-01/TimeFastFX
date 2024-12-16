@@ -37,6 +37,9 @@ public class Rol {
         this.DescripcionRol = DescripcionRol;
     }
 
-    
-    
+    // Sobrescribir toString para mostrar la descripción del rol en el ComboBox
+    @Override
+    public String toString() {
+        return DescripcionRol;
+    }
 }

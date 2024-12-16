@@ -24,21 +24,12 @@ public class Colaborador {
     private Integer idRol;
     private String rol;
     private String fotoBase64;
-    private String noLicencia;
+    private String numeroLicencia;
     private String noPersonal;
     private Integer idConductor;
-    private String numeroLicencia;
+    private String telefono;
 
-    // Lista adicional de colaboradores (si es necesario para relaciones o lógica interna)
-    private List<Colaborador> colaboradores;
-
-    public Colaborador() {
-        this.colaboradores = new ArrayList<>();
-    }
-
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno,
-                        String curp, String correo, String password, Integer idRol, String rol, String fotoBase64,
-                        String noLicencia, String noPersonal, Integer idConductor, String numeroLicencia) {
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String correo, String password, Integer idRol, String rol, String fotoBase64, String numeroLicencia, String noPersonal, Integer idConductor, String telefono, List<Colaborador> colaboradores) {
         this.idColaborador = idColaborador;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -49,12 +40,30 @@ public class Colaborador {
         this.idRol = idRol;
         this.rol = rol;
         this.fotoBase64 = fotoBase64;
-        this.noLicencia = noLicencia;
+        this.numeroLicencia = numeroLicencia;
         this.noPersonal = noPersonal;
         this.idConductor = idConductor;
         this.numeroLicencia = numeroLicencia;
+        this.telefono = telefono;
+        this.colaboradores = colaboradores;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    // Lista adicional de colaboradores (si es necesario para relaciones o lógica interna)
+    private List<Colaborador> colaboradores;
+
+    public Colaborador() {
         this.colaboradores = new ArrayList<>();
     }
+
+    
 
     public Integer getIdColaborador() {
         return idColaborador;
@@ -136,12 +145,12 @@ public class Colaborador {
         this.fotoBase64 = fotoBase64;
     }
 
-    public String getNoLicencia() {
-        return noLicencia;
+    public String getNumeroLicencia() {
+        return numeroLicencia;
     }
 
-    public void setNoLicencia(String noLicencia) {
-        this.noLicencia = noLicencia;
+    public void setNumeroLicencia(String numeroLicencia) {
+        this.numeroLicencia = numeroLicencia;
     }
 
     public String getNoPersonal() {
@@ -159,15 +168,6 @@ public class Colaborador {
     public void setIdConductor(Integer idConductor) {
         this.idConductor = idConductor;
     }
-
-    public String getNumeroLicencia() {
-        return numeroLicencia;
-    }
-
-    public void setNumeroLicencia(String numeroLicencia) {
-        this.numeroLicencia = numeroLicencia;
-    }
-
     public List<Colaborador> getColaboradores() {
         return colaboradores;
     }
