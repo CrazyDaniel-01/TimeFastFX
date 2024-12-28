@@ -8,8 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FastTimeFX.jar" size="407632" download="eager" />
+    <jar href="FastTimeFX.jar" size="428753" download="eager" />
     <jar href="lib\gson-2.9.1.jar" size="265030" download="eager" />
+    <jar href="lib\mssql-jdbc-8.4.1.jre8.jar" size="1300917" download="eager" />
+    <jar href="lib\mybatis-3.3.1.jar" size="1567287" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.20.jar" size="2385601" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="FastTimeFX" >
     <param name="requiredFXVersion" value="8.0+"/>

@@ -7,6 +7,8 @@ import java.util.List;
  * Representa una unidad con sus atributos principales.
  */
 public class Unidad {
+
+    
     private Integer idUnidad;
     private String marca;
     private String modelo;
@@ -16,6 +18,7 @@ public class Unidad {
     private String idInterno;
     private String tipoUnidad;
     private List<Unidad> unidades;
+    private String tipo;
 
     // Constructor vacío que inicializa la lista de unidades
     public Unidad() {
@@ -23,7 +26,7 @@ public class Unidad {
     }
 
     // Constructor con parámetros
-    public Unidad(Integer idUnidad, String marca, String modelo, String anio, String vin, Integer idTipo, String idInterno, String tipoUnidad) {
+    public Unidad(Integer idUnidad, String marca, String modelo, String anio, String vin, Integer idTipo, String idInterno, String tipoUnidad, List<Unidad> unidades, String tipo) {
         this.idUnidad = idUnidad;
         this.marca = marca;
         this.modelo = modelo;
@@ -32,7 +35,8 @@ public class Unidad {
         this.idTipo = idTipo;
         this.idInterno = idInterno;
         this.tipoUnidad = tipoUnidad;
-        this.unidades = new ArrayList<>();
+        this.unidades = unidades;
+        this.tipo = tipo;
     }
 
     // Getters y setters
@@ -99,6 +103,14 @@ public class Unidad {
 
     public void setTipoUnidad(String tipoUnidad) {
         this.tipoUnidad = tipoUnidad;
+    }
+    
+    public String gettipo() {
+        return tipo;
+    }
+
+    public void settipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public List<Unidad> getUnidades() {

@@ -13,21 +13,18 @@ public class Cliente {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String calle;
-    private Integer numero;
+    private String numero;
     private String colonia;
-    private Integer codigoPostal;
+    private String codigoPostal;
     private String telefono;
     private String correo;
     private String direccion;
     private Integer idDireccion;
 
-    private List<Cliente> clientes;
-
     public Cliente() {
-        this.clientes = new ArrayList<>();
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String calle, Integer numero, String colonia, Integer codigoPostal, String telefono, String correo, String direccion, Integer idDireccion) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String calle, String numero, String colonia, String codigoPostal, String telefono, String correo, String direccion, Integer idDireccion, List<Cliente> clientes) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -40,8 +37,28 @@ public class Cliente {
         this.correo = correo;
         this.direccion = direccion;
         this.idDireccion = idDireccion;
-        this.clientes = new ArrayList<>();
+        this.clientes = clientes;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    private List<Cliente> clientes;
+
+    
 
     public Integer getIdCliente() {
         return idCliente;
@@ -83,13 +100,7 @@ public class Cliente {
         this.calle = calle;
     }
 
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
+    
 
     public String getColonia() {
         return colonia;
@@ -99,14 +110,7 @@ public class Cliente {
         this.colonia = colonia;
     }
 
-    public Integer getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(Integer codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-
+    
     public String getTelefono() {
         return telefono;
     }

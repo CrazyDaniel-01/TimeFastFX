@@ -9,34 +9,8 @@ import java.util.List;
  * @author afs30
  */
 public class Envio {
-    private Integer idEnvio;
-    private Integer idCliente;
-    private Integer idOrigen;
-    private Integer idDestino;
-    private Integer idPaquete;
-    private String calle;
-    private Integer numero;
-    private String colonia;
-    private Integer codigoPostal;
-    private String ciudad;
-    private String estado;
-    private String destino;
-    private String origen;
-    private String noGuia;
-    private String costo;
-    private String status;
-    private String cliente;
 
-    // Lista adicional para posibles relaciones con otros envíos
-    private List<Envio> enviosRelacionados;
-
-    public Envio() {
-        this.enviosRelacionados = new ArrayList<>();
-    }
-
-    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle,
-                 Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino,
-                 String origen, String noGuia, String costo, String status, String cliente) {
+    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, String conductor, List<Envio> enviosRelacionados) {
         this.idEnvio = idEnvio;
         this.idCliente = idCliente;
         this.idOrigen = idOrigen;
@@ -54,8 +28,45 @@ public class Envio {
         this.costo = costo;
         this.status = status;
         this.cliente = cliente;
+        this.conductor = conductor;
+        this.enviosRelacionados = enviosRelacionados;
+    }
+    private Integer idEnvio;
+    private Integer idCliente;
+    private Integer idOrigen;
+    private Integer idDestino;
+    private Integer idPaquete;
+    private String calle;
+    private Integer numero;
+    private String colonia;
+    private Integer codigoPostal;
+    private String ciudad;
+    private String estado;
+    private String destino;
+    private String origen;
+    private String noGuia;
+    private String costo;
+    private String status;
+    private String cliente;
+    private String conductor;
+
+    public String getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
+    }
+    
+
+    // Lista adicional para posibles relaciones con otros envíos
+    private List<Envio> enviosRelacionados;
+
+    public Envio() {
         this.enviosRelacionados = new ArrayList<>();
     }
+
+    
 
     public Integer getIdEnvio() {
         return idEnvio;

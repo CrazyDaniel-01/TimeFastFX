@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="1075.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.FormularioClienteFXMLController">
+    <children>
+      <Label alignment="CENTER" prefHeight="36.0" style="-fx-background-color: #61449E;" text="Cliente" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Rockwell" size="18.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="352.0" prefWidth="873.0" spacing="20.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <VBox prefHeight="348.0" prefWidth="417.0" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Nombre">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorNombre" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfNombre" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label text="Apellido Paterno">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorApellidoPaterno" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfApellidoPaterno" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label text="Apellido Materno">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorApellidoMaterno" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfApellidoMaterno" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label text="telefono">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorTelefono" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfTelefono" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label text="Correo">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorCorreo" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfCorreo" />
+               </children>
+            </VBox>
+            <VBox prefHeight="369.0" prefWidth="426.0" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="22.0" prefWidth="518.0" text="Direccion:" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Rockwell" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="24.0" prefWidth="431.0" spacing="15.0">
+                     <children>
+                        <Label text="Calle">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorCalle" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfCalle" />
+                  <HBox prefHeight="24.0" prefWidth="431.0" spacing="15.0">
+                     <children>
+                        <Label text="Colonia">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorColonia" textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfColonia" />
+                  <HBox prefHeight="24.0" prefWidth="431.0" spacing="15.0">
+                     <children>
+                        <HBox prefHeight="24.0" prefWidth="431.0" spacing="15.0">
+                           <children>
+                              <Label text="Numero">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="errorNumero" textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="24.0" prefWidth="431.0" spacing="15.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="123.0" text="Codigo Postal">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="errorCodigoPostal" textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <TextField fx:id="tfNumero" prefHeight="25.0" prefWidth="224.0" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tfCodigoPostal" prefHeight="25.0" prefWidth="224.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="126.0" prefWidth="431.0" spacing="30.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="btnAgregar" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#clicGuardarCliente" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Agregar Cliente" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
