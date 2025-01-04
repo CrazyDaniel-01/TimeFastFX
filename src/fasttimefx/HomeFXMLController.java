@@ -91,8 +91,6 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     private Button btnEnvios;
     @FXML
     private Button btnPaquetes;
-    @FXML
-    private ImageView imgBuscar;
   
     @FXML
     private TableColumn colNombre;
@@ -170,6 +168,28 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     private TextField buscaColaborador;
     @FXML
     private TextField buscaCliente;
+    @FXML
+    private ImageView imgBuscarUnidad;
+    @FXML
+    private Button btnAgregarUnidad;
+    @FXML
+    private Button btnEliminarUnidad;
+    @FXML
+    private Button btnAsociarUnidad;
+    @FXML
+    private Button btnAgregarEnvio;
+    @FXML
+    private Button btnEditarEnvio;
+    @FXML
+    private Button btnEliminarEnvio;
+    @FXML
+    private Button btnAsignarConductor;
+    @FXML
+    private Button btnAsctualizarEstado;
+    @FXML
+    private ImageView imgBuscarCliente;
+    @FXML
+    private ImageView imgBuscarColaborador;
     
    
 
@@ -214,6 +234,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         recargarTablaEnvio();
         
         
+        
     }
     private void cargarDatos(){
         recargarTablaColaboradores();
@@ -234,6 +255,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             System.out.println("No se encontraron colaboradores con ese nombre.");
         }
     }
+    @FXML
     public void buscarCliente() {
         String nombreClienteBuscado = buscaCliente.getText().trim();
         List<Cliente> resultados = ClienteDAO.buscarClientesPorNombre(nombreClienteBuscado);
@@ -251,10 +273,10 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioColaboradorFXML.fxml"));
             
             Parent root= loader.load();
-            //
+            
             FormularioColaboradorFXMLController controlador = loader.getController();
             controlador.inicializarValores(observador, colaborador);
-            //
+            
             Stage escenarioForm=new Stage();
             Scene escenarioFormulario = new Scene(root);
             escenarioForm.setScene(escenarioFormulario);
@@ -283,16 +305,63 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    private void irFormularioUnidad(NotificadorOperaciones observador, Unidad unidad) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioUnidadFXML.fxml"));
+            Parent root = loader.load();
+            FormularioUnidadFXMLController controlador = loader.getController();
+            controlador.inicializarValores(observador, unidad);
+
+            Stage escenarioForm = new Stage();
+            Scene escenarioFormulario = new Scene(root);
+            escenarioForm.setScene(escenarioFormulario);
+            escenarioForm.setTitle("Administración de Unidades");
+            escenarioForm.initModality(APPLICATION_MODAL);
+            escenarioForm.showAndWait();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void irFormularioBajaUnidad(NotificadorOperaciones observador, Unidad unidad) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioBajaUnidadFXML.fxml"));
+            Parent root = loader.load();
+            FormularioBajaUnidadFXMLController controlador = loader.getController();
+            controlador.recibirUnidad(observador, unidad);
+
+            Stage escenarioForm = new Stage();
+            Scene escenarioFormulario = new Scene(root);
+            escenarioForm.setScene(escenarioFormulario);
+            escenarioForm.setTitle("Baja de Unidades");
+            escenarioForm.initModality(APPLICATION_MODAL);
+            escenarioForm.showAndWait();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @FXML
     private void btnAgregarUnidad(ActionEvent event) {
+        irFormularioUnidad(this,null);
     }
 
     @FXML
     private void btnEditarUnidad(ActionEvent event) {
+        Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            irFormularioUnidad(this, unidad);
+        } else {
+            Utilidades.mostrarNotificacion("Seleccionar Unidad ", "Para editar, seleccione primero una unidad.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void btnEliminarUnidad(ActionEvent event) {
+        Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            irFormularioBajaUnidad(this, unidad);
+        } else {
+            Utilidades.mostrarNotificacion("Seleccionar Unidad ", "Para dar de baja una unidad, seleccione primero una unidad.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -363,7 +432,6 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
 
     @FXML
     private void btnEliminarColaborador(ActionEvent event) {
-        System.out.print("Esto es un boton de eliminar");
         Colaborador colaborador= tvColaborador.getSelectionModel().getSelectedItem();
         if(colaborador!=null){
             eliminarColaborador(colaborador.getIdColaborador());
@@ -421,6 +489,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         tvCliente.getItems().clear();
         cargarDatosCliente();
     }
+    @FXML
     private void recargarTablaUnidades() {
         tvUnidad.getItems().clear();
         cargarDatosUnidad();
@@ -434,6 +503,11 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     private void recargarTablaEnvio() {
         tvEnvios.getItems().clear();
         cargarDatosEnvio();
+    }
+    @FXML
+    private void recargarTablaUnidad(){
+        tvUnidad.getItems().clear();
+        cargarDatosUnidad();
     }
     
     

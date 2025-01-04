@@ -12,6 +12,7 @@ import fasttimefx.pojo.Colaborador;
 import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.Rol;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.collections.FXCollections;
@@ -39,10 +40,10 @@ public class FormularioColaboradorFXMLController implements Initializable {
      * Initializes the controller class.
      */
     private NotificadorOperaciones observador;
-    private Colaborador colaboradorEedicion;
+    private Colaborador colaboradorEdicion;
     private boolean modoEdicion = false;
     @FXML
-    ObservableList<Rol> tiposColaboradores = RolDAO.obtenerRoles();
+    private ObservableList<Rol> rol;
     
     @FXML
     private TextField tfNombre;
@@ -85,32 +86,18 @@ public class FormularioColaboradorFXMLController implements Initializable {
     private Label errorNumLicencia;
     @Override
 public void initialize(URL url, ResourceBundle rb) {
-    cargarTipoUsuarios();
+    cargarTiposUsuarios();
 }
-
-private void cargarTipoUsuarios(){
-    ObservableList<Rol> tiposColaboradores = FXCollections.observableArrayList();
-    tiposColaboradores.add(new Rol(1, "Administrador"));
-    tiposColaboradores.add(new Rol(2, "Conductor"));
-    tiposColaboradores.add(new Rol(3, "Operador"));
-    cbRol.setItems(tiposColaboradores);
-}  
-    public void inicializarValores(NotificadorOperaciones observador,Colaborador colaboradorEdicion){
-        this.observador=observador;
-        this.colaboradorEedicion=colaboradorEdicion;
+  
+public void inicializarValores(NotificadorOperaciones observador,Colaborador colaboradorEdicion){
+    this.observador=observador;
+    this.colaboradorEdicion=colaboradorEdicion;
         if(colaboradorEdicion!=null){
             modoEdicion=true;
             cargarDatosEdicion();
         }
-    }
+}
     
-    private int buscarIdRol(int idRol){
-        for (int i=0; i<tiposColaboradores.size();i++){
-            if(tiposColaboradores.get(i).getIdRol()==idRol)
-                return 1;
-        }
-        return 0;
-    }
     @FXML
     public void clicGuardarColaborador(ActionEvent event){
         
@@ -125,8 +112,9 @@ private void cargarTipoUsuarios(){
                 String password=tfContra.getText();
                 String correo=tfCorreo.getText();
                 String curp=tfCURP.getText();
-                Integer rol=cbRol.getSelectionModel().getSelectedItem().getIdRol();
-                if(rol==2){
+                Integer idRol =((cbRol.getSelectionModel().getSelectedItem() !=null)?cbRol.getSelectionModel().getSelectedItem().getIdRol(): null);
+
+                if(idRol==2){
                     String numeroLicencia=tfNumLicencia.getText();
                     colaborador.setNumeroLicencia(numeroLicencia);
                 }
@@ -137,11 +125,11 @@ private void cargarTipoUsuarios(){
                 colaborador.setPassword(password);
                 colaborador.setCorreo(correo);
                 colaborador.setCurp(curp);
-                colaborador.setIdRol(rol);
+                colaborador.setIdRol(idRol);
             
            guardarDatosColaborador(colaborador);
             }else{
-                colaborador.setIdColaborador(this.colaboradorEedicion.getIdColaborador());
+                colaborador.setIdColaborador(this.colaboradorEdicion.getIdColaborador());
                 colaborador.setNombre(tfNombre.getText());
                 colaborador.setApellidoPaterno(tfPaterno.getText());
                 colaborador.setApellidoMaterno(tfMaterno.getText());
@@ -161,17 +149,17 @@ private void cargarTipoUsuarios(){
     }
 
     private void cargarDatosEdicion() {
-        tfNombre.setText(this.colaboradorEedicion.getNombre());
-        tfPaterno.setText(this.colaboradorEedicion.getApellidoPaterno());
-        tfMaterno.setText(this.colaboradorEedicion.getApellidoMaterno());
-        tfCURP.setText(this.colaboradorEedicion.getCurp());
-        tfContra.setText(this.colaboradorEedicion.getPassword());
-        tfCorreo.setText(this.colaboradorEedicion.getCorreo());
-        tfNoPersonal.setText(this.colaboradorEedicion.getNoPersonal());
-        int posicion= buscarIdRol(this.colaboradorEedicion.getIdRol());
+        tfNombre.setText(this.colaboradorEdicion.getNombre());
+        tfPaterno.setText(this.colaboradorEdicion.getApellidoPaterno());
+        tfMaterno.setText(this.colaboradorEdicion.getApellidoMaterno());
+        tfCURP.setText(this.colaboradorEdicion.getCurp());
+        tfContra.setText(this.colaboradorEdicion.getPassword());
+        tfCorreo.setText(this.colaboradorEdicion.getCorreo());
+        tfNoPersonal.setText(this.colaboradorEdicion.getNoPersonal());
+        int posicion= buscarIdRol(this.colaboradorEdicion.getIdRol());
         cbRol.getSelectionModel().select(posicion);
-        if(this.colaboradorEedicion.getIdRol()==2){
-        tfNumLicencia.setText(this.colaboradorEedicion.getNumeroLicencia());
+        if(this.colaboradorEdicion.getIdRol()==2){
+        tfNumLicencia.setText(this.colaboradorEdicion.getNumeroLicencia());
         }
     }
     private void guardarDatosColaborador(Colaborador colaborador){
@@ -284,4 +272,31 @@ private void cargarTipoUsuarios(){
     }
     
     }
+    
+    
+   private void cargarTiposUsuarios() {
+    rol = FXCollections.observableArrayList();
+    List<Rol> listaWS = RolDAO.obtenerRol();
+    if (listaWS != null && !listaWS.isEmpty()) {
+        rol.addAll(listaWS);
+        cbRol.setItems(rol);
+        System.out.println("Roles cargados correctamente.");
+    } else {
+        Utilidades.mostrarNotificacion("ERROR AL CARGAR", 
+            "No se pudieron cargar los roles. Por favor, inténtelo más tarde.", 
+            Alert.AlertType.ERROR);
+    }
+}
+
+    
+    
+    private int buscarIdRol(int idRol){
+    for(int i=0; i<rol.size(); i++){
+        if(rol.get(i).getIdRol()== idRol)
+            return i;
+    }
+    return 0;
+    }
+    
+    
 }

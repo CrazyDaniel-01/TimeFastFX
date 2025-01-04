@@ -11,14 +11,14 @@ package fasttimefx.pojo;
  */
 public class Rol {
     private Integer idRol;
-    private String DescripcionRol;
+    private String descripcionRol;
 
     public Rol() {
     }
 
-    public Rol(Integer idRol, String DescripcionRol) {
+    public Rol(Integer idRol, String descripcionRol) {
         this.idRol = idRol;
-        this.DescripcionRol = DescripcionRol;
+        this.descripcionRol = descripcionRol;
     }
 
     public Integer getIdRol() {
@@ -30,16 +30,16 @@ public class Rol {
     }
 
     public String getDescripcionRol() {
-        return DescripcionRol;
+        return descripcionRol;
     }
 
-    public void setDescripcionRol(String DescripcionRol) {
-        this.DescripcionRol = DescripcionRol;
+    public void setDescripcionRol(String descripcionRol) {
+        this.descripcionRol = descripcionRol;
     }
 
     // Sobrescribir toString para mostrar la descripción del rol en el ComboBox
     @Override
     public String toString() {
-        return DescripcionRol;
+        return descripcionRol;
     }
 }
