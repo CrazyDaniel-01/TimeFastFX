@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="385.0" style="-fx-background-color: #f4f4f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.FormularioBajaUnidadFXMLController">
+<children>
+      <Label alignment="CENTER" prefHeight="36.0" style="-fx-background-color: #61449E;" text="Baja de Unidad" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Rockwell" size="18.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="352.0" prefWidth="873.0" spacing="20.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <VBox prefHeight="369.0" prefWidth="426.0" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="79.0" prefWidth="394.0" spacing="15.0">
+                     <children>
+                        <Label text="Motivo de baja">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="errorMotivo" alignment="BOTTOM_CENTER" text=" " textFill="RED">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="taMotivoBaja" prefHeight="200.0" prefWidth="200.0" />
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="111.0" prefWidth="394.0" spacing="15.0">
+                     <children>
+                        <Button fx:id="btnBaja" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clicBajaUnidad" prefHeight="34.0" prefWidth="255.0" stylesheets="@../Estilos/EstilosBotones.css" text="Dar de Baja Unidad" textFill="WHITE">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

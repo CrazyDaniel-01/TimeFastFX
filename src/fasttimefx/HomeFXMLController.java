@@ -169,6 +169,8 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     @FXML
     private TextField buscaCliente;
     @FXML
+    private TextField buscaUnidad;
+    @FXML
     private ImageView imgBuscarUnidad;
     @FXML
     private Button btnAgregarUnidad;
@@ -267,6 +269,20 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             System.out.println("No se encontraron colaboradores con ese nombre.");
         }
     }
+    
+    @FXML
+    public void buscarUnidad() {
+    String nombreUnidadBuscada = buscaUnidad.getText().trim();
+    List<Unidad> resultados = UnidadDAO.buscarUnidadesPorMarca(nombreUnidadBuscada);
+    unidades.clear();
+    if (resultados != null && !resultados.isEmpty()) {
+        unidades.addAll(resultados);
+        tvUnidad.setItems(unidades);
+    } else {
+        System.out.println("No se encontraron unidades con ese nombre.");
+    }
+}
+
     
     private void irFormularioColaborador(NotificadorOperaciones observador, Colaborador colaborador){
         try {
@@ -525,8 +541,8 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         // Unidades
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
-        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipoUnidad"));
-        colAño.setCellValueFactory(new PropertyValueFactory<>("anio"));
+        colTipo.setCellValueFactory(new PropertyValueFactory<>("descripcionTipo"));
+        colAño.setCellValueFactory(new PropertyValueFactory<>("año"));
         colVIN.setCellValueFactory(new PropertyValueFactory<>("vin"));
         colNumeroIn.setCellValueFactory(new PropertyValueFactory<>("idInterno"));
 

@@ -83,7 +83,7 @@ public class FormularioUnidadFXMLController implements Initializable {
                 
                 unidad.setMarca(marca);
                 unidad.setModelo(modelo);
-                unidad.setAnio(anio);
+                unidad.setAño(anio);
                 unidad.setVin(vin);
                 unidad.setIdTipo(idTipo);
                 
@@ -92,7 +92,7 @@ public class FormularioUnidadFXMLController implements Initializable {
                 unidad.setIdUnidad(this.unidadEdicion.getIdUnidad());
                 unidad.setMarca(tfMarca.getText());
                 unidad.setModelo(tfModelo.getText());
-                unidad.setAnio(tfAnio.getText());
+                unidad.setAño(tfAnio.getText());
                 unidad.setVin(tfVin.getText());
                 unidad.setIdTipo(cbTipo.getSelectionModel().getSelectedItem().getIdTipo());
                 editarDatosUnidad(unidad);
@@ -151,7 +151,7 @@ public class FormularioUnidadFXMLController implements Initializable {
     public void cargarDatosEdicion(){
         tfMarca.setText(this.unidadEdicion.getMarca());
         tfModelo.setText(this.unidadEdicion.getModelo());
-        tfAnio.setText(this.unidadEdicion.getAnio());
+        tfAnio.setText(this.unidadEdicion.getAño());
         tfVin.setText(this.unidadEdicion.getVin());
         int posicion= buscarIdTipo(this.unidadEdicion.getIdTipo());
         cbTipo.getSelectionModel().select(posicion);
@@ -162,7 +162,7 @@ public class FormularioUnidadFXMLController implements Initializable {
         Mensaje msj=UnidadDAO.registrarUnidad(unidad);
         if(!msj.isError()){
             Utilidades.mostrarNotificacion("Registro exitoso", "La informacion de la unidad "+unidad.getMarca()
-                    +" "+unidad.getModelo()+ " "+ unidad.getAnio()+", fue registrada exitosamente", Alert.AlertType.INFORMATION);
+                    +" "+unidad.getModelo()+ " "+ unidad.getAño()+", fue registrada exitosamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacion("Nuevo Registro", unidad.getMarca());
         }else{
@@ -175,7 +175,7 @@ public class FormularioUnidadFXMLController implements Initializable {
         Mensaje msj = UnidadDAO.actualizarUnidad(unidad);
         if (!msj.isError()) {
             Utilidades.mostrarNotificacion("Actualización exitosa", "La información de la unidad "+unidad.getMarca()
-                    +" "+unidad.getModelo()+ " "+ unidad.getAnio()+" fue actualizada exitosamente", Alert.AlertType.INFORMATION);
+                    +" "+unidad.getModelo()+ " "+ unidad.getAño()+" fue actualizada exitosamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacion("Edición de Registro", unidad.getModelo());
 

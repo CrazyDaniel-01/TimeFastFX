@@ -80,5 +80,24 @@ public class UnidadDAO {
             }
             return msj;
         }   
-           
+        
+      public static List<Unidad> buscarUnidadesPorMarca(String marca) {
+    List<Unidad> unidades = null;
+    String url = Constantes.URL_WS + "unidad/obtenerUnidadMarca/" + marca;
+    System.out.println(url);
+    RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+
+    if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+        Gson gson = new Gson();
+        try {
+            Type tipoListaUnidad = new TypeToken<List<Unidad>>() {}.getType();
+            unidades = gson.fromJson(respuesta.getContenido(), tipoListaUnidad);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    return unidades;
+}
+
 }
