@@ -6,14 +6,15 @@
 package fasttimefx.pojo;
 
 public class AsociacionVehicular {
-    private Integer idUnidad;
+  
     private Integer idConductor;
+    private Integer idUnidad;
 
-    public Integer getIdUnidad() {
-        return idUnidad;
+    public AsociacionVehicular() {
     }
 
-    public void setIdUnidad(Integer idUnidad) {
+    public AsociacionVehicular(Integer idConductor, Integer idUnidad) {
+        this.idConductor = idConductor;
         this.idUnidad = idUnidad;
     }
 
@@ -24,4 +25,16 @@ public class AsociacionVehicular {
     public void setIdConductor(Integer idConductor) {
         this.idConductor = idConductor;
     }
+
+    public Integer getIdUnidad() {
+        return idUnidad;
+    }
+
+    public void setIdUnidad(Integer idUnidad) {
+        this.idUnidad = idUnidad;
+    }
+
+    
 }
+
+

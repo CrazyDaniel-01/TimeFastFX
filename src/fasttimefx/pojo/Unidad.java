@@ -108,4 +108,21 @@ public class Unidad {
     public void setUnidades(List<Unidad> unidades) {
         this.unidades = unidades;
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+   @Override
+    public String toString() {
+    return this.marca;
+}
+}
+>>>>>>> Stashed changes

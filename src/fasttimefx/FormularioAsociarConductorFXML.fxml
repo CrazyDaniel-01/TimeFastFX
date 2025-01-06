@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="239.0" prefWidth="516.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.FormularioAsociarConductorFXMLController">
+   <children>
+      <Label fx:id="errorColaborador" />
+      <Label fx:id="errorUnidad" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+             <ComboBox fx:id="cbColaborador" promptText="Seleccione un conductor" />
+             <ComboBox fx:id="cbUnidad" promptText="Seleccione una unidad" />
+             <Button onAction="#clicGuardarAsociacion" text="Guardar" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

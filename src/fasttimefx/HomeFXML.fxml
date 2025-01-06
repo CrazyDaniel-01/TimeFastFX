@@ -88,7 +88,19 @@
                         <Insets top="16.0" />
                      </HBox.margin>
                   </Button>
+<<<<<<< Updated upstream
                   <Button mnemonicParsing="false" onAction="#btnEliminarUnidad" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Eliminar Unidad" textFill="WHITE" HBox.hgrow="ALWAYS">
+=======
+                  <Button fx:id="btnEliminarUnidad" mnemonicParsing="false" onAction="#btnEliminarUnidad" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Baja Unidad" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Rockwell" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="16.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnAsociarUnidad" mnemonicParsing="false" onAction="#btnAsociarUnidad" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Asociar Unidad" textFill="WHITE">
+>>>>>>> Stashed changes
                      <font>
                         <Font name="Rockwell" size="18.0" />
                      </font>

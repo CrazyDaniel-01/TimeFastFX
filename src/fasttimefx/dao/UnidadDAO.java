@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import fasttimefx.modelo.ConexionWS;
 import fasttimefx.pojo.Colaborador;
 import fasttimefx.pojo.RespuestaHTTP;
+import fasttimefx.pojo.Rol;
 import fasttimefx.pojo.Unidad;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -36,4 +37,72 @@ public class UnidadDAO {
         }
         return unidades;
     }
+<<<<<<< Updated upstream
+=======
+           
+            public static Mensaje registrarUnidad(Unidad unidad){
+        Mensaje msj = new Mensaje();
+        String url= Constantes.URL_WS+"unidad/registrarUnidad";
+        Gson gson= new Gson();
+            try{
+                String parametros=gson.toJson(unidad);
+                System.out.print(parametros);
+                RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
+                if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
+                    msj=gson.fromJson(respuesta.getContenido(), Mensaje.class);
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje(respuesta.getContenido());
+                }
+            }catch(Exception e){
+                  msj.setError(true);
+                  msj.setMensaje(e.getMessage());
+            }
+            return msj;
+    }
+            
+      
+      public static Mensaje actualizarUnidad(Unidad unidad) {
+            Mensaje msj = new Mensaje();
+            String url = Constantes.URL_WS + "unidad/editarUnidad";
+            Gson gson = new Gson();
+
+            try {
+                String parametros = gson.toJson(unidad);
+                System.out.println(parametros);
+                RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
+                if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                    msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+                } else {
+                    msj.setError(true);
+                    msj.setMensaje(respuesta.getContenido());
+                }
+            } catch (Exception e) {
+                msj.setError(true);
+                msj.setMensaje("Error al actualizar la unidad: " + e.getMessage());
+            }
+            return msj;
+        }   
+        
+      public static List<Unidad> buscarUnidadesPorMarca(String marca) {
+    List<Unidad> unidades = null;
+    String url = Constantes.URL_WS + "unidad/obtenerUnidadMarca/" + marca;
+    System.out.println(url);
+    RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+
+    if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+        Gson gson = new Gson();
+        try {
+            Type tipoListaUnidad = new TypeToken<List<Unidad>>() {}.getType();
+            unidades = gson.fromJson(respuesta.getContenido(), tipoListaUnidad);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    return unidades;
+}
+
+
+>>>>>>> Stashed changes
 }

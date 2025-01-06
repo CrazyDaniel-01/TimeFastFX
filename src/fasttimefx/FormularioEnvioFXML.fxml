@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="414.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.FormularioEnvioFXMLController">
+   <children>
+      <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="36.0" style="-fx-background-color: #61449E;" text="Envio" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Rockwell" size="18.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <HBox spacing="8.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="56.0" prefWidth="524.0">
+                     <children>
+                        <Label text="Enviar a:" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label textFill="RED" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbCliente" prefHeight="25.0" prefWidth="501.0" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Costo">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField alignment="TOP_LEFT" prefHeight="34.0" prefWidth="252.0">
+                           <font>
+                              <Font name="Rockwell" size="18.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="16.0" right="16.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="400.0" prefWidth="600.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Calle Origen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfCalleOrigen">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Numero Origen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfNumeroOrigen">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Colonia Origen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfColoniaOrigen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="CodigoPostal Origen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfCPOrigen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></TextField>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="21.0" prefWidth="498.0">
+                           <children>
+                              <Label text="Ciudad Origen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfCuidadOrigen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font></TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Estado Origen">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfEstado">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="16.0" right="16.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="400.0" prefWidth="600.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Calle Destino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="#f80000" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfCalleDestino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Numero Destino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfNumeroDestino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Colonia Destino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfColoniaDestino">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="CodigoPostal Destino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfCPDestino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Ciudad Destino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfCuidadDestino">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Estado Destino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label textFill="RED">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfEstadoDestino">
+                                 <font>
+                                    <Font name="Rockwell" size="18.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="16.0" right="16.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="240.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="16.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="240.0" prefWidth="600.0">
+               <children>
+                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#clicGuardarEnvio" prefHeight="34.0" prefWidth="229.0" stylesheets="@../Estilos/EstilosBotones.css" text="Agregar Envio" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
