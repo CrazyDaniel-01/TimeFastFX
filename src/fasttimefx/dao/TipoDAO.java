@@ -22,21 +22,39 @@ import javafx.collections.ObservableList;
  * @author Daniel
  */
 public class TipoDAO {
-    public static ObservableList<Tipo> obtenerTipos() {
-        ObservableList<Tipo> tipos = FXCollections.observableArrayList();  
-        String url = Constantes.URL_WS + "rol/obtenerRol";  
-        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+   public static ObservableList<Tipo> obtenerTipos() {
+    ObservableList<Tipo> tipos = FXCollections.observableArrayList();
+    String url = Constantes.URL_WS + "unidad/obtenerTipo";
+    RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
 
-        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
-            Gson gson = new Gson();
-            try {
-                Type tipoListaRol = new TypeToken<List<Tipo>>(){}.getType();
-                List<Tipo> listaRoles = gson.fromJson(respuesta.getContenido(), tipoListaRol);
-                tipos.addAll(listaRoles);  
-            } catch (Exception e) {
-                e.printStackTrace();
+    System.out.println("URL de solicitud: " + url);
+    System.out.println("Código de respuesta: " + respuesta.getCodigoRespuesta());
+    System.out.println("Contenido recibido: " + respuesta.getContenido());
+
+    if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+        Gson gson = new Gson();
+        try {
+            Type tipoListaTipos = new TypeToken<List<Tipo>>() {}.getType();
+            List<Tipo> listaTipos = gson.fromJson(respuesta.getContenido(), tipoListaTipos);
+
+            if (listaTipos != null) {
+                tipos.addAll(listaTipos);
+                System.out.println("Tipos cargados desde el JSON:");
+                for (Tipo t : listaTipos) {
+                    System.out.println("ID: " + t.getIdTipo() + ", Nombre: " + t.getDescripcionTipo());
+                }
+            } else {
+                System.out.println("La lista de tipos es nula después de la conversión.");
             }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error durante la conversión del JSON:");
+            e.printStackTrace();
         }
-        return tipos;  
+    } else {
+        System.out.println("Error en la solicitud: Código " + respuesta.getCodigoRespuesta());
     }
+
+    return tipos;
+}
+
 }

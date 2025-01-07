@@ -114,7 +114,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 String curp=tfCURP.getText();
                 Integer idRol =((cbRol.getSelectionModel().getSelectedItem() !=null)?cbRol.getSelectionModel().getSelectedItem().getIdRol(): null);
 
-                if(idRol==2){
+                if(idRol==3){
                     String numeroLicencia=tfNumLicencia.getText();
                     colaborador.setNumeroLicencia(numeroLicencia);
                 }
@@ -138,7 +138,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 colaborador.setCorreo(tfCorreo.getText());
                 colaborador.setCurp(tfCURP.getText());
                 colaborador.setIdRol(cbRol.getSelectionModel().getSelectedIndex()+1);
-                if(cbRol.getSelectionModel().getSelectedIndex()==1){
+                if(cbRol.getSelectionModel().getSelectedIndex()==2){
                     colaborador.setNumeroLicencia(tfNumLicencia.getText());
                 }
                 
@@ -248,7 +248,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
     }
 
     // Validación del número de licencia si el rol seleccionado es "conductor" (índice 1)
-    if (cbRol.getSelectionModel().getSelectedIndex() == 1 && tfNumLicencia.getText().isEmpty()) {
+    if (cbRol.getSelectionModel().getSelectedIndex() == 2 && tfNumLicencia.getText().isEmpty()) {
         validos = false;
         errorNumLicencia.setText("Por favor ingrese un número de licencia de conductor");
     } else {

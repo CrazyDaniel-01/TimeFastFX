@@ -23,7 +23,7 @@
                   <Image url="@../img/Logo.png" />
                </image>
             </ImageView>
-            <Label text="Correo">
+            <Label text="Numero de Personal">
                <font>
                   <Font name="Rockwell" size="18.0" />
                </font>
@@ -65,7 +65,7 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></PasswordField>
-            <Button fx:id="btnLogin" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickIngresar" prefHeight="34.0" prefWidth="383.0" stylesheets="@../Estilos/EstilosBotones.css" text="Button" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnLogin" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickIngresar" prefHeight="34.0" prefWidth="383.0" stylesheets="@../Estilos/EstilosBotones.css" text="Iniciar Sesion" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Rockwell" size="18.0" />
                </font>

@@ -11,14 +11,14 @@ package fasttimefx.pojo;
  */
 public class Tipo {
     private Integer idTipo;
-    private String DescripcionTipo;
+    private String descripcionTipo;
 
     public Tipo() {
     }
 
-    public Tipo(Integer idTipo, String DescripcionTipo) {
+    public Tipo(Integer idTipo, String descripcionTipo) {
         this.idTipo = idTipo;
-        this.DescripcionTipo = DescripcionTipo;
+        this.descripcionTipo = descripcionTipo;
     }
 
     public Integer getIdTipo() {
@@ -30,10 +30,17 @@ public class Tipo {
     }
 
     public String getDescripcionTipo() {
-        return DescripcionTipo;
+        return descripcionTipo;
     }
 
     public void setDescripcionTipo(String DescripcionTipo) {
-        this.DescripcionTipo = DescripcionTipo;
+        this.descripcionTipo = DescripcionTipo;
     }
+    
+    @Override
+public String toString() {
+    return descripcionTipo; // Muestra la descripción del tipo en el ComboBox
 }
+
+}
+

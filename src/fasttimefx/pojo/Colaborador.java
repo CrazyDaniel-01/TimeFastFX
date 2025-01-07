@@ -175,4 +175,10 @@ public class Colaborador {
     public void setColaboradores(List<Colaborador> colaboradores) {
         this.colaboradores = colaboradores;
     }
+    
+    @Override
+    public String toString() {
+    return this.nombre; // Reemplaza "nombre" con el atributo que desees mostrar
+}
+
 }

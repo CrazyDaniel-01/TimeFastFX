@@ -150,4 +150,9 @@ public class Cliente {
     public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }
+    
+      @Override
+    public String toString() {
+    return this.nombre; // Reemplaza "nombre" con el atributo que desees mostrar
+}
 }

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fasttimefx.modelo.ConexionWS;
 import fasttimefx.pojo.Envio;
+import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.Paquete;
 import fasttimefx.pojo.RespuestaHTTP;
 import java.lang.reflect.Type;
@@ -36,5 +37,67 @@ public class PaqueteDAO {
             }
         }
         return paquetes;
+    }
+        public static Mensaje actualizarPaquete(Paquete paquete) {
+            Mensaje msj = new Mensaje();
+            String url = Constantes.URL_WS + "paquete/editarPaquete";
+            Gson gson = new Gson();
+
+            try {
+                String parametros = gson.toJson(paquete);
+                System.out.println(parametros);
+                RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
+                if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                    msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+                } else {
+                    msj.setError(true);
+                    msj.setMensaje(respuesta.getContenido());
+                }
+            } catch (Exception e) {
+                msj.setError(true);
+                msj.setMensaje("Error al actualizar el paquete: " + e.getMessage());
+            }
+            return msj;
+        }   
+        public static Mensaje eliminarPaquete(Integer idPaquete) {
+            Mensaje msj = new Mensaje();
+            String url = Constantes.URL_WS + "paquete/eliminarPaquete/"+idPaquete;
+            Gson gson = new Gson();
+            System.out.println(url);
+            try {
+                RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url, idPaquete.toString());
+
+                if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                    msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+                } else {
+                    msj.setError(true);
+                    msj.setMensaje(respuesta.getContenido());
+                }
+            } catch (Exception e) {
+                msj.setError(true);
+                msj.setMensaje("Error al eliminar paquete: " + e.getMessage());
+            }
+            return msj;
+        }   
+        
+        public static Mensaje registrarPaquete(Paquete paquete){
+        Mensaje msj = new Mensaje();
+        String url= Constantes.URL_WS+"paquete/registrarPaquete";
+        Gson gson= new Gson();
+            try{
+                String parametros=gson.toJson(paquete);
+                System.out.print(parametros);
+                RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
+                if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
+                    msj=gson.fromJson(respuesta.getContenido(), Mensaje.class);
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje(respuesta.getContenido());
+                }
+            }catch(Exception e){
+                  msj.setError(true);
+                  msj.setMensaje(e.getMessage());
+            }
+            return msj;
     }
 }

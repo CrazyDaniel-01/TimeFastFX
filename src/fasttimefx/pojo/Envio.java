@@ -10,38 +10,24 @@ import java.util.List;
  */
 public class Envio {
 
-    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, String conductor, List<Envio> enviosRelacionados) {
-        this.idEnvio = idEnvio;
-        this.idCliente = idCliente;
-        this.idOrigen = idOrigen;
-        this.idDestino = idDestino;
-        this.idPaquete = idPaquete;
-        this.calle = calle;
-        this.numero = numero;
-        this.colonia = colonia;
-        this.codigoPostal = codigoPostal;
-        this.ciudad = ciudad;
-        this.estado = estado;
-        this.destino = destino;
-        this.origen = origen;
-        this.noGuia = noGuia;
-        this.costo = costo;
-        this.status = status;
-        this.cliente = cliente;
-        this.conductor = conductor;
-        this.enviosRelacionados = enviosRelacionados;
-    }
+  
     private Integer idEnvio;
     private Integer idCliente;
     private Integer idOrigen;
     private Integer idDestino;
     private Integer idPaquete;
-    private String calle;
-    private Integer numero;
-    private String colonia;
-    private Integer codigoPostal;
-    private String ciudad;
-    private String estado;
+    private String calleOrigen;
+    private Integer numeroOrigen;
+    private String coloniaOrigen;
+    private Integer codigoPostalOrigen;
+    private String ciudadOrigen;
+    private String estadoOrigen;
+    private String calleDestino;
+    private Integer numeroDestino;
+    private String coloniaDestino;
+    private Integer codigoPostalDestino;
+    private String ciudadDestino;
+    private String estadoDestino;
     private String destino;
     private String origen;
     private String noGuia;
@@ -49,24 +35,36 @@ public class Envio {
     private String status;
     private String cliente;
     private String conductor;
+    private String numeroGuia;
 
-    public String getConductor() {
-        return conductor;
-    }
-
-    public void setConductor(String conductor) {
+    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calleOrigen, Integer numeroOrigen, String coloniaOrigen, Integer codigoPostalOrigen, String ciudadOrigen, String estadoOrigen, String calleDestino, Integer numeroDestino, String coloniaDestino, Integer codigoPostalDestino, String ciudadDestino, String estadoDestino, String destino, String origen, String noGuia, String costo, String status, String cliente, String conductor, String numeroGuia, List<Envio> enviosRelacionados) {
+        this.idEnvio = idEnvio;
+        this.idCliente = idCliente;
+        this.idOrigen = idOrigen;
+        this.idDestino = idDestino;
+        this.idPaquete = idPaquete;
+        this.calleOrigen = calleOrigen;
+        this.numeroOrigen = numeroOrigen;
+        this.coloniaOrigen = coloniaOrigen;
+        this.codigoPostalOrigen = codigoPostalOrigen;
+        this.ciudadOrigen = ciudadOrigen;
+        this.estadoOrigen = estadoOrigen;
+        this.calleDestino = calleDestino;
+        this.numeroDestino = numeroDestino;
+        this.coloniaDestino = coloniaDestino;
+        this.codigoPostalDestino = codigoPostalDestino;
+        this.ciudadDestino = ciudadDestino;
+        this.estadoDestino = estadoDestino;
+        this.destino = destino;
+        this.origen = origen;
+        this.noGuia = noGuia;
+        this.costo = costo;
+        this.status = status;
+        this.cliente = cliente;
         this.conductor = conductor;
+        this.numeroGuia = numeroGuia;
+        this.enviosRelacionados = enviosRelacionados;
     }
-    
-
-    // Lista adicional para posibles relaciones con otros envíos
-    private List<Envio> enviosRelacionados;
-
-    public Envio() {
-        this.enviosRelacionados = new ArrayList<>();
-    }
-
-    
 
     public Integer getIdEnvio() {
         return idEnvio;
@@ -108,52 +106,100 @@ public class Envio {
         this.idPaquete = idPaquete;
     }
 
-    public String getCalle() {
-        return calle;
+    public String getCalleOrigen() {
+        return calleOrigen;
     }
 
-    public void setCalle(String calle) {
-        this.calle = calle;
+    public void setCalleOrigen(String calleOrigen) {
+        this.calleOrigen = calleOrigen;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public Integer getNumeroOrigen() {
+        return numeroOrigen;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNumeroOrigen(Integer numeroOrigen) {
+        this.numeroOrigen = numeroOrigen;
     }
 
-    public String getColonia() {
-        return colonia;
+    public String getColoniaOrigen() {
+        return coloniaOrigen;
     }
 
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
+    public void setColoniaOrigen(String coloniaOrigen) {
+        this.coloniaOrigen = coloniaOrigen;
     }
 
-    public Integer getCodigoPostal() {
-        return codigoPostal;
+    public Integer getCodigoPostalOrigen() {
+        return codigoPostalOrigen;
     }
 
-    public void setCodigoPostal(Integer codigoPostal) {
-        this.codigoPostal = codigoPostal;
+    public void setCodigoPostalOrigen(Integer codigoPostalOrigen) {
+        this.codigoPostalOrigen = codigoPostalOrigen;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public String getCiudadOrigen() {
+        return ciudadOrigen;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setCiudadOrigen(String ciudadOrigen) {
+        this.ciudadOrigen = ciudadOrigen;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstadoOrigen() {
+        return estadoOrigen;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoOrigen(String estadoOrigen) {
+        this.estadoOrigen = estadoOrigen;
+    }
+
+    public String getCalleDestino() {
+        return calleDestino;
+    }
+
+    public void setCalleDestino(String calleDestino) {
+        this.calleDestino = calleDestino;
+    }
+
+    public Integer getNumeroDestino() {
+        return numeroDestino;
+    }
+
+    public void setNumeroDestino(Integer numeroDestino) {
+        this.numeroDestino = numeroDestino;
+    }
+
+    public String getColoniaDestino() {
+        return coloniaDestino;
+    }
+
+    public void setColoniaDestino(String coloniaDestino) {
+        this.coloniaDestino = coloniaDestino;
+    }
+
+    public Integer getCodigoPostalDestino() {
+        return codigoPostalDestino;
+    }
+
+    public void setCodigoPostalDestino(Integer codigoPostalDestino) {
+        this.codigoPostalDestino = codigoPostalDestino;
+    }
+
+    public String getCiudadDestino() {
+        return ciudadDestino;
+    }
+
+    public void setCiudadDestino(String ciudadDestino) {
+        this.ciudadDestino = ciudadDestino;
+    }
+
+    public String getEstadoDestino() {
+        return estadoDestino;
+    }
+
+    public void setEstadoDestino(String estadoDestino) {
+        this.estadoDestino = estadoDestino;
     }
 
     public String getDestino() {
@@ -204,6 +250,37 @@ public class Envio {
         this.cliente = cliente;
     }
 
+    public String getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
+    }
+
+    public String getNumeroGuia() {
+        return numeroGuia;
+    }
+
+    public void setNumeroGuia(String numeroGuia) {
+        this.numeroGuia = numeroGuia;
+    }
+
+    @Override
+    public String toString() {
+    return this.numeroGuia;
+    }
+    
+
+    // Lista adicional para posibles relaciones con otros envíos
+    private List<Envio> enviosRelacionados;
+
+    public Envio() {
+        this.enviosRelacionados = new ArrayList<>();
+    }
+
+    
+
     public List<Envio> getEnviosRelacionados() {
         return enviosRelacionados;
     }
@@ -211,4 +288,8 @@ public class Envio {
     public void setEnviosRelacionados(List<Envio> enviosRelacionados) {
         this.enviosRelacionados = enviosRelacionados;
     }
+
+    
+
+   
 }

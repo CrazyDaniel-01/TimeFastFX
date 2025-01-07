@@ -62,7 +62,7 @@ public class LoginFXMLController implements Initializable {
         Login respuestaLogin = LoginDAO.iniciarSesion(NoPersonal, Password);
         if(!respuestaLogin.getError()){
             
-            Utilidades.mostrarNotificacion("Bienvenido", "Bienvenido(a) a gymfort", Alert.AlertType.INFORMATION);
+            Utilidades.mostrarNotificacion("Bienvenido", "Bienvenido(a) a timefast", Alert.AlertType.INFORMATION);
             irPantallaPrincipal();
     }else{
             

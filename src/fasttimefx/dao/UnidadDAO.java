@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import fasttimefx.modelo.ConexionWS;
 import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.RespuestaHTTP;
+import fasttimefx.pojo.Rol;
 import fasttimefx.pojo.Unidad;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -99,5 +100,6 @@ public class UnidadDAO {
 
     return unidades;
 }
+
 
 }

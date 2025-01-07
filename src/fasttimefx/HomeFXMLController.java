@@ -338,6 +338,23 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    private void irFormularioAsociarConductor(NotificadorOperaciones observador, Unidad unidad,Colaborador colaborador) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioAsociarConductorFXML.fxml"));
+            Parent root = loader.load();
+            FormularioAsociarConductorFXMLController controlador = loader.getController();
+            controlador.inicializarValores(observador, unidad,colaborador);
+
+            Stage escenarioForm = new Stage();
+            Scene escenarioFormulario = new Scene(root);
+            escenarioForm.setScene(escenarioFormulario);
+            escenarioForm.setTitle("Asociar Conductor");
+            escenarioForm.initModality(APPLICATION_MODAL);
+            escenarioForm.showAndWait();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void irFormularioBajaUnidad(NotificadorOperaciones observador, Unidad unidad) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioBajaUnidadFXML.fxml"));
@@ -349,6 +366,42 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             Scene escenarioFormulario = new Scene(root);
             escenarioForm.setScene(escenarioFormulario);
             escenarioForm.setTitle("Baja de Unidades");
+            escenarioForm.initModality(APPLICATION_MODAL);
+            escenarioForm.showAndWait();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void irFormularioPaquete(NotificadorOperaciones observador, Paquete paquete) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioPaqueteFXML.fxml"));
+            Parent root = loader.load();
+            FormularioPaqueteFXMLController controlador = loader.getController();
+            controlador.inicializarValores(observador, paquete);
+
+            Stage escenarioForm = new Stage();
+            Scene escenarioFormulario = new Scene(root);
+            escenarioForm.setScene(escenarioFormulario);
+            escenarioForm.setTitle("Gestion de Paquetes");
+            escenarioForm.initModality(APPLICATION_MODAL);
+            escenarioForm.showAndWait();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+        private void irFormularioEnvio(NotificadorOperaciones observador, Envio envio) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioEnvioFXML.fxml"));
+            Parent root = loader.load();
+            FormularioEnvioFXMLController controlador = loader.getController();
+            controlador.inicializarValores(observador, envio);
+
+            Stage escenarioForm = new Stage();
+            Scene escenarioFormulario = new Scene(root);
+            escenarioForm.setScene(escenarioFormulario);
+            escenarioForm.setTitle("Gestion de Paquetes");
             escenarioForm.initModality(APPLICATION_MODAL);
             escenarioForm.showAndWait();
         } catch (Exception ex) {
@@ -379,29 +432,59 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             Utilidades.mostrarNotificacion("Seleccionar Unidad ", "Para dar de baja una unidad, seleccione primero una unidad.", Alert.AlertType.WARNING);
         }
     }
+    @FXML
+    private void btnAsociarUnidad(ActionEvent event) {
+        irFormularioAsociarConductor(this, null,null);
+    }
 
     @FXML
     private void btnAgregarEnvio(ActionEvent event) {
+        irFormularioEnvio(this, null);
     }
 
     @FXML
     private void btnEditarEnvio(ActionEvent event) {
+        Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        if (envio != null) {
+            irFormularioEnvio(this, envio);
+        } else {
+            Utilidades.mostrarNotificacion("Seleccionar el Envio ", "Para editar, seleccione primero un envio.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void btnEliminarEnvio(ActionEvent event) {
+                Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        if (envio != null) {
+            eliminarEnvio(envio.getIdEnvio());
+        } else {
+            Utilidades.mostrarNotificacion("Seleccionar ENVIO", "Para eliminar, seleccione primero un envio.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void btnAgregarPaquete(ActionEvent event) {
+        irFormularioPaquete(this,null);
     }
 
     @FXML
     private void btnEditarPaqute(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if (paquete != null) {
+            irFormularioPaquete(this, paquete);
+        } else {
+            Utilidades.mostrarNotificacion("Seleccionar Unidad ", "Para editar un paquete, primero seleccione un paquete.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void btnEliminarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if (paquete != null) {
+            eliminarPaquete(paquete.getIdPaquete());
+        } else {
+            Utilidades.mostrarNotificacion("Seleccionar cliente", "Para eliminar, seleccione primero un cliente.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -483,18 +566,55 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     confirmacion.setContentText("Esta acción no se puede deshacer.");
 
     Optional<ButtonType> resultado = confirmacion.showAndWait();
-    if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-        Mensaje msj = ClienteDAO.eliminarCliente(idCliente);
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            Mensaje msj = ClienteDAO.eliminarCliente(idCliente);
 
-        if (!msj.isError()) {
-            Utilidades.mostrarNotificacion("Eliminación exitosa", "El cliente con ID " + idCliente + " fue eliminado correctamente.", Alert.AlertType.INFORMATION);
-            notificarOperacion("eliminar", "cliente");
-        } else {
-            Utilidades.mostrarNotificacion("Error al eliminar", msj.getMensaje(), Alert.AlertType.ERROR);
+            if (!msj.isError()) {
+                Utilidades.mostrarNotificacion("Eliminación exitosa", "El cliente con ID " + idCliente + " fue eliminado correctamente.", Alert.AlertType.INFORMATION);
+                notificarOperacion("eliminar", "cliente");
+            } else {
+                Utilidades.mostrarNotificacion("Error al eliminar", msj.getMensaje(), Alert.AlertType.ERROR);
+            }
         }
     }
-}
+    private void eliminarPaquete(Integer idPaquete) {
+    Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmacion.setTitle("Confirmar eliminación");
+    confirmacion.setHeaderText("¿Estás seguro de que deseas eliminar el paquete?");
+    confirmacion.setContentText("Esta acción no se puede deshacer.");
+
+    Optional<ButtonType> resultado = confirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            Mensaje msj = PaqueteDAO.eliminarPaquete(idPaquete);
+
+            if (!msj.isError()) {
+                Utilidades.mostrarNotificacion("Eliminación exitosa", "El paquete con ID " + idPaquete + " fue eliminado correctamente.", Alert.AlertType.INFORMATION);
+                notificarOperacion("eliminar", "cliente");
+            } else {
+                Utilidades.mostrarNotificacion("Error al eliminar", msj.getMensaje(), Alert.AlertType.ERROR);
+            }
+        }
+    }
     
+    
+      private void eliminarEnvio(Integer idEnvio) {
+    Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmacion.setTitle("Confirmar eliminación");
+    confirmacion.setHeaderText("¿Estás seguro de que deseas eliminar el envio?");
+    confirmacion.setContentText("Esta acción no se puede deshacer.");
+
+    Optional<ButtonType> resultado = confirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            Mensaje msj = EnvioDAO.eliminarEnvio(idEnvio);
+
+            if (!msj.isError()) {
+                Utilidades.mostrarNotificacion("Eliminación exitosa", "El envio con ID " + idEnvio + " fue eliminado correctamente.", Alert.AlertType.INFORMATION);
+                notificarOperacion("eliminar", "envio");
+            } else {
+                Utilidades.mostrarNotificacion("Error al eliminar", msj.getMensaje(), Alert.AlertType.ERROR);
+            }
+        }
+    }
     @FXML
     private void recargarTablaColaboradores() {
         tvColaborador.getItems().clear();
