@@ -177,12 +177,12 @@
                         </HBox>
                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                            <children>
-                              <Button fx:id="btnAsignarConductor" mnemonicParsing="false" onAction="#btnAgregarEnvio" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Asignar Conductor" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Button fx:id="btnAsignarConductor" mnemonicParsing="false" onAction="#btnAsociarConductor" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Asignar Conductor" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Rockwell" size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnAsctualizarEstado" mnemonicParsing="false" onAction="#btnAgregarEnvio" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Actualizar Estado" textFill="WHITE">
+                              <Button fx:id="btnAsctualizarEstado" mnemonicParsing="false" onAction="#btnActualizarEstado" prefWidth="250.0" stylesheets="@../Estilos/EstilosBotones.css" text="Actualizar Estado" textFill="WHITE">
                                  <font>
                                     <Font name="Rockwell" size="18.0" />
                                  </font>
@@ -198,6 +198,7 @@
                 <TableColumn fx:id="colEnvio" prefWidth="75.0" text="Cliente" />
                 <TableColumn fx:id="colOrigen" prefWidth="75.0" text="Origen" />
                   <TableColumn fx:id="colGuia" prefWidth="75.0" text="Numero de Guia" />
+                  <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
                   <TableColumn fx:id="colDestino" prefWidth="75.0" text="Destino" />
                   <TableColumn fx:id="colCosto" prefWidth="75.0" text="Costo " />
                   <TableColumn fx:id="colConductor" prefWidth="75.0" text="Conductor" />

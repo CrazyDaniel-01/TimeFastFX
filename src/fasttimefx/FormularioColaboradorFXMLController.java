@@ -11,6 +11,7 @@ import fasttimefx.dao.RolDAO;
 import fasttimefx.pojo.Colaborador;
 import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.Rol;
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,6 +27,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import observador.NotificadorOperaciones;
 
@@ -42,7 +45,6 @@ public class FormularioColaboradorFXMLController implements Initializable {
     private NotificadorOperaciones observador;
     private Colaborador colaboradorEdicion;
     private boolean modoEdicion = false;
-    @FXML
     private ObservableList<Rol> rol;
     
     @FXML
@@ -84,6 +86,12 @@ public class FormularioColaboradorFXMLController implements Initializable {
     private Label errorRol;
     @FXML
     private Label errorNumLicencia;
+    @FXML
+    private Label errorFoto;
+    @FXML
+    private ImageView imgCliente;
+    @FXML
+    private Button btnFoto;
     @Override
 public void initialize(URL url, ResourceBundle rb) {
     cargarTiposUsuarios();
@@ -296,6 +304,11 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
             return i;
     }
     return 0;
+    }
+
+    @FXML
+    private void clicSubirFoto(ActionEvent event) {
+    
     }
     
     

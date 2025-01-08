@@ -28,6 +28,7 @@ public class FormularioEnvioFXMLController implements Initializable {
     private NotificadorOperaciones observador;
     private Envio envioEdicion;
     private boolean modoEdicion = false;
+    
     private ObservableList<Cliente> cliente;
 
     @FXML
@@ -114,6 +115,7 @@ public void inicializarValores(NotificadorOperaciones observador, Envio envioEdi
         ? cbCliente.getSelectionModel().getSelectedItem().getIdCliente()
         : null);
     envio.setIdCliente(idCliente);
+    
 
     envio.setCalleOrigen(tfCalleOrigen.getText());
     envio.setCalleDestino(tfCalleDestino.getText());
@@ -145,7 +147,9 @@ public void inicializarValores(NotificadorOperaciones observador, Envio envioEdi
     envio.setEstadoOrigen(tfEstadoOrigen.getText());
     envio.setIdCliente(cbCliente.getSelectionModel().getSelectedIndex()+1);
     envio.setCosto(tfCosto.getText());
-    
+    envio.setIdOrigen(this.envioEdicion.getIdOrigen());
+    envio.setIdDestino(this.envioEdicion.getIdDestino());
+    envio.setIdEnvio(this.envioEdicion.getIdEnvio());
                 setDatosEnvio(envio);
                 Integer idCliente = (cbCliente.getSelectionModel().getSelectedItem() != null)
                         ? cbCliente.getSelectionModel().getSelectedItem().getIdCliente()
@@ -157,46 +161,52 @@ public void inicializarValores(NotificadorOperaciones observador, Envio envioEdi
     }
 
   private void cargarDatosEdicion() {
-    try {
-        if (envioEdicion !=null) {
-            // Cargar datos en los campos con validaciones de null
-        tfCalleOrigen.setText(envioEdicion.getCalleOrigen() != null ? envioEdicion.getCalleOrigen() : "");
-        tfNumeroOrigen.setText(envioEdicion.getNumeroOrigen() != null ? String.valueOf(envioEdicion.getNumeroOrigen()) : "");
-        tfColoniaOrigen.setText(envioEdicion.getColoniaOrigen() != null ? envioEdicion.getColoniaOrigen() : "");
-        tfCPOrigen.setText(envioEdicion.getCodigoPostalOrigen() != null ? String.valueOf(envioEdicion.getCodigoPostalOrigen()) : "");
-        tfCuidadOrigen.setText(envioEdicion.getCiudadOrigen() != null ? envioEdicion.getCiudadOrigen() : "");
-        tfEstadoOrigen.setText(envioEdicion.getEstadoOrigen() != null ? envioEdicion.getEstadoOrigen() : "");
+      desglosarDireccionOrigen(this.envioEdicion.getOrigen());
+      desglosarDireccionDestino(this.envioEdicion.getDestino());
 
-        tfCalleDestino.setText(envioEdicion.getCalleDestino() != null ? envioEdicion.getCalleDestino() : "");
-        tfNumeroDestino.setText(envioEdicion.getNumeroDestino() != null ? String.valueOf(envioEdicion.getNumeroDestino()) : "");
-        tfColoniaDestino.setText(envioEdicion.getColoniaDestino() != null ? envioEdicion.getColoniaDestino() : "");
-        tfCPDestino.setText(envioEdicion.getCodigoPostalDestino() != null ? String.valueOf(envioEdicion.getCodigoPostalDestino()) : "");
-        tfCuidadDestino.setText(envioEdicion.getCiudadDestino() != null ? envioEdicion.getCiudadDestino() : "");
-        tfEstadoDestino.setText(envioEdicion.getEstadoDestino() != null ? envioEdicion.getEstadoDestino() : "");
-
-            
-        }else{
-        throw new IllegalArgumentException("El objeto envioEdicion es null.");
-        }
-
-        
-        // Seleccionar cliente
-        int posicion = buscarIdCliente(envioEdicion.getIdCliente());
-        if (posicion >= 0) {
-            cbCliente.getSelectionModel().select(posicion);
-        } else {
-            System.err.println("Cliente no encontrado para el ID: " + envioEdicion.getIdCliente());
-        }
-
-        // Cargar costo
-        tfCosto.setText(envioEdicion.getCosto() != null ? envioEdicion.getCosto() : "");
-    } catch (Exception e) {
-        System.err.println("Error al cargar datos de edición: " + e.getMessage());
-        e.printStackTrace();
-    }
+        tfCosto.setText(this.envioEdicion.getCosto() != null ? envioEdicion.getCosto() : "");
+    
 }
 
-
+private void desglosarDireccionOrigen(String direccion){
+    String[] partes = direccion.split(",\\s*");  
+    if (partes.length == 6) {
+        String calle = partes[0];
+        String numero = partes[1];
+        String colonia = partes[2];
+        String codigoPostal = partes[3];
+        String ciudad = partes[4];
+        String estado= partes[5];
+        tfCalleOrigen.setText(calle);
+        tfNumeroOrigen.setText(numero);
+        tfColoniaOrigen.setText(colonia);
+        tfCPOrigen.setText(codigoPostal);
+        tfCuidadOrigen.setText(ciudad);
+        tfEstadoOrigen.setText(estado);
+    } else {
+        System.out.println("Dirección de origen mal formateada");
+    }
+}
+private void desglosarDireccionDestino(String direccion){
+    String[] partes = direccion.split(",\\s*");  
+    if (partes.length == 6) {
+        String calle = partes[0];
+        String numero = partes[1];
+        String colonia = partes[2];
+        String codigoPostal = partes[3];
+        String ciudad = partes[4];
+        String estado= partes[5];
+        tfCalleDestino.setText(calle);
+        tfNumeroDestino.setText(numero);
+        tfColoniaDestino.setText(colonia);
+        tfCPDestino.setText(codigoPostal);
+        tfCuidadDestino.setText(ciudad);
+        tfEstadoDestino.setText(estado);
+    } else {
+        System.out.println("Dirección de origen mal formateada");
+    }
+}
+        
 private boolean validarCampos() {
     boolean camposValidos = true;
         if (tfCalleOrigen.getText().isEmpty()) {
@@ -291,7 +301,6 @@ private boolean esNumeroValido(String numero) {
     }
 }
 
-// Verifica si un código postal es válido (5 dígitos numéricos en México)
 private boolean esCodigoPostalValido(String codigoPostal) {
     return codigoPostal.matches("\\d{5}");
 }
@@ -327,21 +336,18 @@ private boolean esCodigoPostalValido(String codigoPostal) {
     }
 
     private void editarDatosEnvio(Envio envio) {
-        
-            System.out.println("Guardando envío con costo: " + envio.getCosto());
-    System.out.println("Cliente ID: " + envio.getIdCliente());
-        Mensaje msj = EnvioDAO.actualizarEnvio(envio);
+    Mensaje msj = EnvioDAO.actualizarEnvio(envio);
 
-        if (!msj.isError()) {
-            Utilidades.mostrarNotificacion("Actualización exitosa",
-                    "El envío fue actualizado exitosamente.",
-                    Alert.AlertType.INFORMATION);
-            cerrarVentana();
-            observador.notificarOperacion("Edición de Registro", envio.getCalleOrigen());
-        } else {
-            Utilidades.mostrarNotificacion("Error al actualizar", msj.getMensaje(), Alert.AlertType.ERROR);
-        }
+    if (!msj.isError()) {
+        Utilidades.mostrarNotificacion("Actualización exitosa",
+                "El envío fue actualizado exitosamente.",
+                Alert.AlertType.INFORMATION);
+        cerrarVentana();
+        observador.notificarOperacion("Edición", envio.getCalleOrigen());
+    } else {
+        Utilidades.mostrarNotificacion("Error al actualizar", msj.getMensaje(), Alert.AlertType.ERROR);
     }
+}
 
     public void cargarDatosCliente() {
         cliente = FXCollections.observableArrayList();

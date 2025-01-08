@@ -192,6 +192,8 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     private ImageView imgBuscarCliente;
     @FXML
     private ImageView imgBuscarColaborador;
+    @FXML
+    private TableColumn colEstado;
     
    
 
@@ -344,6 +346,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             Parent root = loader.load();
             FormularioAsociarConductorFXMLController controlador = loader.getController();
             controlador.inicializarValores(observador, unidad,colaborador);
+            
 
             Stage escenarioForm = new Stage();
             Scene escenarioFormulario = new Scene(root);
@@ -445,8 +448,10 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     @FXML
     private void btnEditarEnvio(ActionEvent event) {
         Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        System.out.println(envio.getOrigen());
+        System.out.println(envio.getCalleOrigen());
         if (envio != null) {
-            irFormularioEnvio(this, envio);
+            irFormularioEnvio(this,envio);
         } else {
             Utilidades.mostrarNotificacion("Seleccionar el Envio ", "Para editar, seleccione primero un envio.", Alert.AlertType.WARNING);
         }
@@ -460,6 +465,10 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         } else {
             Utilidades.mostrarNotificacion("Seleccionar ENVIO", "Para eliminar, seleccione primero un envio.", Alert.AlertType.WARNING);
         }
+    }
+    @FXML
+    private void btnAsociarConductor(){
+        irFormularioAsociarConductor(this, null,null);
     }
 
     @FXML
@@ -640,7 +649,6 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         tvEnvios.getItems().clear();
         cargarDatosEnvio();
     }
-    @FXML
     private void recargarTablaUnidad(){
         tvUnidad.getItems().clear();
         cargarDatosUnidad();
@@ -670,6 +678,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         colEnvio.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         colOrigen.setCellValueFactory(new PropertyValueFactory<>("origen"));
         colGuia.setCellValueFactory(new PropertyValueFactory<>("noGuia"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("status"));
         colDestino.setCellValueFactory(new PropertyValueFactory<>("destino"));
         colCosto.setCellValueFactory(new PropertyValueFactory<>("costo"));
         colConductor.setCellValueFactory(new PropertyValueFactory<>("conductor"));
@@ -747,6 +756,11 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         }else {
             Utilidades.mostrarNotificacion("Error", "No se pudo cargar la información de paquetes.", Alert.AlertType.ERROR);
         }
+    }
+
+
+    @FXML
+    private void btnActualizarEstado(ActionEvent event) {
     }
     
     

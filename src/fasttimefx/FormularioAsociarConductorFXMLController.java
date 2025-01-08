@@ -20,16 +20,26 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import observador.NotificadorOperaciones;
 import com.google.gson.Gson;
+import fasttimefx.pojo.Envio;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FormularioAsociarConductorFXMLController implements Initializable {
 
+    
+    private Envio envioAsignacion;
     private NotificadorOperaciones observador;
     private Unidad unidadEdicion;
     private Colaborador colaboradorEdicion;
     private boolean modoEdicion = false;
+    private boolean modoAsignarEnvio=false;
 
     private ObservableList<Colaborador> colaborador;
     private ObservableList<Unidad> unidad;
+    private ObservableList<AsociacionVehicular> asociaciones;
+    
     @FXML
     private ComboBox<Colaborador> cbColaborador;
     @FXML
@@ -38,6 +48,22 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
     private Label errorColaborador;
     @FXML
     private Label errorUnidad;
+    @FXML
+    private TableView<AsociacionVehicular> tvConductores;
+    @FXML
+    private TableColumn colUnidad;
+    @FXML
+    private TableColumn colConductor;
+    @FXML
+    private TableColumn colEnvio;
+    @FXML
+    private Button btnAsociarConductor;
+    @FXML
+    private Button btnEliminarAsociacion;
+    @FXML
+    private Button btnEditarAsociacion;
+    @FXML
+    private Button btnEditarAsociacion1;
 
    
     @Override
@@ -48,8 +74,11 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
     if (cbUnidad == null) {
         System.err.println("cbUnidad no está inicializado.");
     }
+    configurarTabla();
     cargarDatosColaborador();
     cargarDatosUnidad();
+    cargarTabla();
+    
 }
 
 
@@ -61,6 +90,14 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
         if (unidad != null) {
             modoEdicion = true;
             cargarDatosEdicion();
+        }
+        
+    }
+    private void recibirEnvio(Envio envio){
+        this.envioAsignacion=envio;
+        if(envio!=null){
+            cbUnidad.setDisable(true);
+            cbColaborador.setDisable(true);
         }
     }
 
@@ -90,7 +127,6 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
             Alert.AlertType.INFORMATION
              
         );
-        cerrarVentana();
     }
 
 
@@ -110,7 +146,6 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
                 Alert.AlertType.INFORMATION
                     
             );
-            cerrarVentana();
         }
     }
 
@@ -147,7 +182,6 @@ private void clicGuardarAsociacion(ActionEvent event) {
    
 
 private void guardarDatos(Integer idConductor, Integer idUnidad) {
-    // Crear la instancia de la clase AsociacionVehicular
     AsociacionVehicular asociacion = new AsociacionVehicular(idConductor, idUnidad);
 
     // Convertir el objeto asociacion a JSON
@@ -201,6 +235,36 @@ private void guardarDatos(Integer idConductor, Integer idUnidad) {
     private void cerrarVentana() {
         Stage stage = (Stage)cbColaborador.getScene().getWindow();
         stage.close();
+    }
+
+    private void configurarTabla() {
+        colUnidad.setCellValueFactory(new PropertyValueFactory<>("unidad"));
+        colConductor.setCellValueFactory(new PropertyValueFactory<>("conductor"));
+        colEnvio.setCellValueFactory(new PropertyValueFactory<>("envioAsociado"));
+        }
+
+    private void cargarTabla() {
+        tvConductores.getItems().clear();
+        asociaciones= FXCollections.observableArrayList();
+        List<AsociacionVehicular> listAsociaciones = AsociarConductorDAO.obtenerAsociaciones();
+        if (listAsociaciones != null) {
+            asociaciones.addAll(listAsociaciones);
+            tvConductores.setItems(asociaciones);
+        } else {
+            Utilidades.mostrarNotificacion("Error", "No se pudo cargar la información de colaboradores.", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void clicEliminarAsociacion(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicEditarAsociacion(ActionEvent event) {
+    }
+    @FXML
+    private void clicAsociarEnvio(ActionEvent event){
+        
     }
 }
  
