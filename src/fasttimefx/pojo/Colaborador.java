@@ -28,8 +28,9 @@ public class Colaborador {
     private String noPersonal;
     private Integer idConductor;
     private String telefono;
+    private byte[] fotoBytes;
 
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String correo, String password, Integer idRol, String rol, String fotoBase64, String numeroLicencia, String noPersonal, Integer idConductor, String telefono, List<Colaborador> colaboradores) {
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String correo, String password, Integer idRol, String rol, String fotoBase64, String numeroLicencia, String noPersonal, Integer idConductor, String telefono, byte[] fotoBytes, List<Colaborador> colaboradores) {
         this.idColaborador = idColaborador;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -43,11 +44,23 @@ public class Colaborador {
         this.numeroLicencia = numeroLicencia;
         this.noPersonal = noPersonal;
         this.idConductor = idConductor;
-        this.numeroLicencia = numeroLicencia;
         this.telefono = telefono;
+        this.fotoBytes = fotoBytes;
         this.colaboradores = colaboradores;
     }
 
+        
+    
+    
+    public byte[] getFotoBytes() {
+        return fotoBytes;
+    }
+
+    public void setFotoBytes(byte[] fotoBytes) {
+        this.fotoBytes = fotoBytes;
+    }
+
+   
     public String getTelefono() {
         return telefono;
     }

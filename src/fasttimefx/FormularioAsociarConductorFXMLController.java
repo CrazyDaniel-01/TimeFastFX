@@ -21,10 +21,13 @@ import javafx.stage.Stage;
 import observador.NotificadorOperaciones;
 import com.google.gson.Gson;
 import fasttimefx.pojo.Envio;
+import java.util.Optional;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import observador.NotificadorOperaciones;
 
 public class FormularioAsociarConductorFXMLController implements Initializable {
 
@@ -61,9 +64,7 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
     @FXML
     private Button btnEliminarAsociacion;
     @FXML
-    private Button btnEditarAsociacion;
-    @FXML
-    private Button btnEditarAsociacion1;
+    private Button btnAsociarEnvio;
 
    
     @Override
@@ -93,11 +94,9 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
         }
         
     }
-    private void recibirEnvio(Envio envio){
+   public void recibirEnvio(Envio envio){
         this.envioAsignacion=envio;
         if(envio!=null){
-            cbUnidad.setDisable(true);
-            cbColaborador.setDisable(true);
         }
     }
 
@@ -170,7 +169,6 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
  @FXML
 private void clicGuardarAsociacion(ActionEvent event) {
     if (validarCampos()) {
-        // Cambiar a obtener idConductor
         Integer idConductor = cbColaborador.getSelectionModel().getSelectedItem().getIdConductor();
         Integer idUnidad = cbUnidad.getSelectionModel().getSelectedItem().getIdUnidad();
 
@@ -209,6 +207,8 @@ private void guardarDatos(Integer idConductor, Integer idUnidad) {
             Alert.AlertType.ERROR
         );
     }
+    
+    
 }
 
 
@@ -257,14 +257,82 @@ private void guardarDatos(Integer idConductor, Integer idUnidad) {
 
     @FXML
     private void clicEliminarAsociacion(ActionEvent event) {
+        AsociacionVehicular av = tvConductores.getSelectionModel().getSelectedItem();
+        if (av!=null){
+            eliminarAsociacion(av.getIdAsociacion());
+        }else{
+             Utilidades.mostrarNotificacion("Seleccionar Asociacion", "Para eliminar, seleccione primero una ascociacion", Alert.AlertType.WARNING);
+        
+        }
     }
 
     @FXML
-    private void clicEditarAsociacion(ActionEvent event) {
-    }
-    @FXML
     private void clicAsociarEnvio(ActionEvent event){
+        AsociacionVehicular av = tvConductores.getSelectionModel().getSelectedItem();
+        if (av!=null){
+            asociarEnvio(av.getIdConductor(),av.getIdAsociacion(),this.envioAsignacion.getIdEnvio());
+        }else{
+             Utilidades.mostrarNotificacion("Seleccionar Asociacion", "Para asociar un envio a un conductor , seleccione primero una ascociacion", Alert.AlertType.WARNING);
         
+        }
+    }
+
+    private void eliminarAsociacion(Integer idAsociacion) {
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmacion.setTitle("Confirmar eliminación");
+    confirmacion.setHeaderText("¿Estás seguro de que deseas anular la asociacio ?");
+    confirmacion.setContentText("Esta acción permitira que se asignar el conductor o la unidad previamente aisignados");
+
+    Optional<ButtonType> resultado = confirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            Mensaje msj = AsociarConductorDAO.eliminarAsociacion(idAsociacion);
+
+            if (!msj.isError()) {
+                Utilidades.mostrarNotificacion("Eliminación exitosa", "La asociacion con ID " + idAsociacion + " fue eliminado correctamente.", Alert.AlertType.INFORMATION);
+                notificarOperacion("eliminar", "cliente");
+            } else {
+                Utilidades.mostrarNotificacion("Error al eliminar", msj.getMensaje(), Alert.AlertType.ERROR);
+            }
+        }}
+
+    
+    public void notificarOperacion(String tipo, String nombre) {
+        System.out.println("Tipo operacion: "+tipo);
+        cargarDatosColaborador();
+        cargarDatosUnidad();
+        cargarTabla();
+        
+        
+        }
+
+    private void asociarEnvio(Integer idConductor,Integer idAsociacion, Integer idEnvio) {
+    AsociacionVehicular asociacion = new AsociacionVehicular(idConductor,idAsociacion,idEnvio);
+
+    Gson gson = new Gson();
+    String jsonAsociacion = gson.toJson(asociacion);
+
+    System.out.println("Datos en JSON: " + jsonAsociacion); // Debug: Verifica el JSON generado
+
+    // Llamar al método que registra la asociación, enviando el JSON
+    Mensaje msj = AsociarConductorDAO.asociarEnvio(jsonAsociacion);
+
+    // Manejar la respuesta
+    if (!msj.isError()) {
+        Utilidades.mostrarNotificacion(
+            "Registro exitoso",
+            "La información se guardó correctamente.",
+            Alert.AlertType.INFORMATION
+        );
+        cerrarVentana();
+        observador.notificarOperacion("Nuevo Registro", idConductor.toString());
+    } else {
+        Utilidades.mostrarNotificacion(
+            "Error al guardar",
+            msj.getMensaje(),
+            Alert.AlertType.ERROR
+        );
+    }
+    
     }
 }
  

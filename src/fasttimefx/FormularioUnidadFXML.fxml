@@ -33,7 +33,7 @@
                   </HBox>
                   <TextField fx:id="tfMarca">
                      <font>
-                        <Font name="Rockwell" size="12.0" />
+                        <Font name="Rockwell" size="18.0" />
                      </font></TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
@@ -51,7 +51,7 @@
                   </HBox>
                   <TextField fx:id="tfModelo">
                      <font>
-                        <Font name="Rockwell" size="12.0" />
+                        <Font name="Rockwell" size="18.0" />
                      </font></TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
@@ -69,7 +69,7 @@
                   </HBox>
                   <TextField fx:id="tfAnio">
                      <font>
-                        <Font name="Rockwell" size="12.0" />
+                        <Font name="Rockwell" size="18.0" />
                      </font></TextField>
                </children>
             </VBox>
@@ -104,7 +104,10 @@
                         </Label>
                      </children>
                   </HBox>
-                  <TextField fx:id="tfVin" />
+                  <TextField fx:id="tfVin">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextField>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="111.0" prefWidth="394.0" spacing="15.0">
                      <children>
                         <Button fx:id="btnAgregar" alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clicGuardarUnidad" prefHeight="34.0" prefWidth="255.0" stylesheets="@../Estilos/EstilosBotones.css" text="Agregar Unidad" textFill="WHITE">

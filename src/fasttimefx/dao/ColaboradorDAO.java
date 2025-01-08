@@ -15,6 +15,7 @@ import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.RespuestaHTTP;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.util.Base64;
 import java.util.List;
 import javafx.scene.control.Alert;
 
@@ -119,5 +120,24 @@ public static Mensaje eliminarColaborador(Integer idColaborador) {
     }
     return colaboradores;
 }
-
+    public static byte[] obtenerFoto(Integer idColaborador) {
+        byte[] foto = null;
+        Colaborador colaborador = null;
+        String url = Constantes.URL_WS+ "colaborador/obtenerFoto/" + idColaborador;
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        Gson gson = new Gson();
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            try {
+                colaborador = gson.fromJson(respuesta.getContenido(), Colaborador.class);
+                String fotografia = colaborador.getFotoBase64();
+                if (fotografia != null) {
+                    fotografia = fotografia.replace("\n", "").replace("\r", "").trim();
+                    foto = Base64.getDecoder().decode(fotografia);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return foto;
+    }
 }

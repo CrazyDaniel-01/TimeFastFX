@@ -11,25 +11,44 @@ public class AsociacionVehicular {
     private Integer idConductor;
     private String conductor;
     private Integer idAsociacion;
+    private Integer idEnvio;
     private String envioAsociado;
 
-    public AsociacionVehicular() {
-    }
-
-    public AsociacionVehicular(Integer idUnidad, String unidad, Integer idConductor, String conductor, Integer idAsociacion, String envioAsociado) {
+    public AsociacionVehicular(Integer idUnidad, String unidad, Integer idConductor, String conductor, Integer idAsociacion, Integer idEnvio, String envioAsociado) {
         this.idUnidad = idUnidad;
         this.unidad = unidad;
         this.idConductor = idConductor;
         this.conductor = conductor;
         this.idAsociacion = idAsociacion;
+        this.idEnvio = idEnvio;
         this.envioAsociado = envioAsociado;
+    }
+
+    public AsociacionVehicular() {
     }
 
     public AsociacionVehicular(Integer idConductor, Integer idUnidad) {
         this.idConductor=idConductor;
         this.idUnidad=idUnidad;
+                }
+
+    public AsociacionVehicular(Integer idConductor,Integer idAsociacion, Integer idEnvio ) {
+        this.idAsociacion=idAsociacion;
+        this.idConductor=idConductor;
+        this.idEnvio=idEnvio;
+                
+                }
+    
+    
+    public Integer getIdEnvio() {
+        return idEnvio;
     }
 
+    public void setIdEnvio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
+    }
+
+    
     public String getEnvioAsociado() {
         return envioAsociado;
     }
@@ -78,8 +97,8 @@ public class AsociacionVehicular {
         return conductor;
     }
 
-    public void setConductor(String conductor) {
-        this.conductor = conductor;
+    public void setConductor(String Conductor) {
+        this.conductor = Conductor;
     }
 
     

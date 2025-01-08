@@ -85,11 +85,6 @@
                   <Font name="Rockwell" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnEditarAsociacion" onAction="#clicEditarAsociacion" stylesheets="@../Estilos/EstilosBotones.css" text="Editar Asociacion" textFill="WHITE">
-               <font>
-                  <Font name="Rockwell" size="18.0" />
-               </font>
-            </Button>
             <Button fx:id="btnAsociarEnvio" onAction="#clicAsociarEnvio" stylesheets="@../Estilos/EstilosBotones.css" text="Asociar Envio" textFill="WHITE">
                <font>
                   <Font name="Rockwell" size="18.0" />

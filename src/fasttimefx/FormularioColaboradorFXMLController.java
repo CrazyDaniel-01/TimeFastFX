@@ -11,11 +11,18 @@ import fasttimefx.dao.RolDAO;
 import fasttimefx.pojo.Colaborador;
 import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.Rol;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +34,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -44,6 +52,7 @@ public class FormularioColaboradorFXMLController implements Initializable {
      */
     private NotificadorOperaciones observador;
     private Colaborador colaboradorEdicion;
+    private File foto;
     private boolean modoEdicion = false;
     private ObservableList<Rol> rol;
     
@@ -89,9 +98,9 @@ public class FormularioColaboradorFXMLController implements Initializable {
     @FXML
     private Label errorFoto;
     @FXML
-    private ImageView imgCliente;
-    @FXML
     private Button btnFoto;
+    @FXML
+    private ImageView imgColaborador;
     @Override
 public void initialize(URL url, ResourceBundle rb) {
     cargarTiposUsuarios();
@@ -107,7 +116,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
 }
     
     @FXML
-    public void clicGuardarColaborador(ActionEvent event){
+    public void clicGuardarColaborador(ActionEvent event) throws IOException{
         
         if(validarCampos()!=false){
             Colaborador colaborador = new Colaborador();
@@ -116,12 +125,12 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 String nombre=tfNombre.getText();
                 String apellidoPaterno=tfPaterno.getText();
                 String apellidoMaterno=tfMaterno.getText();
-
+                byte[] fotoBytes= convertirABytes(foto);
                 String password=tfContra.getText();
                 String correo=tfCorreo.getText();
                 String curp=tfCURP.getText();
                 Integer idRol =((cbRol.getSelectionModel().getSelectedItem() !=null)?cbRol.getSelectionModel().getSelectedItem().getIdRol(): null);
-
+                
                 if(idRol==3){
                     String numeroLicencia=tfNumLicencia.getText();
                     colaborador.setNumeroLicencia(numeroLicencia);
@@ -134,10 +143,12 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 colaborador.setCorreo(correo);
                 colaborador.setCurp(curp);
                 colaborador.setIdRol(idRol);
+                colaborador.setFotoBytes(fotoBytes);
             
            guardarDatosColaborador(colaborador);
             }else{
-                colaborador.setIdColaborador(this.colaboradorEdicion.getIdColaborador());
+                
+                 colaborador.setIdColaborador(this.colaboradorEdicion.getIdColaborador());
                 colaborador.setNombre(tfNombre.getText());
                 colaborador.setApellidoPaterno(tfPaterno.getText());
                 colaborador.setApellidoMaterno(tfMaterno.getText());
@@ -145,6 +156,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 colaborador.setPassword(tfContra.getText());
                 colaborador.setCorreo(tfCorreo.getText());
                 colaborador.setCurp(tfCURP.getText());
+                colaborador.setFotoBytes(this.colaboradorEdicion.getFotoBytes());
                 colaborador.setIdRol(cbRol.getSelectionModel().getSelectedIndex()+1);
                 if(cbRol.getSelectionModel().getSelectedIndex()==2){
                     colaborador.setNumeroLicencia(tfNumLicencia.getText());
@@ -157,6 +169,10 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
     }
 
     private void cargarDatosEdicion() {
+        colaboradorEdicion.setFotoBytes(ColaboradorDAO.obtenerFoto(this.colaboradorEdicion.getIdColaborador()));
+        if(colaboradorEdicion.getFotoBytes()!=null){
+                mostrarFotografia(colaboradorEdicion.getFotoBytes());
+        }
         tfNombre.setText(this.colaboradorEdicion.getNombre());
         tfPaterno.setText(this.colaboradorEdicion.getApellidoPaterno());
         tfMaterno.setText(this.colaboradorEdicion.getApellidoMaterno());
@@ -308,8 +324,42 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
 
     @FXML
     private void clicSubirFoto(ActionEvent event) {
-    
+        try {
+            FileChooser fc = new FileChooser();
+            foto = fc.showOpenDialog(null);
+            Image image =new Image(new FileInputStream(foto));
+            if(foto!=null){
+                imgColaborador.setImage(image);
+                
+            }   } catch (FileNotFoundException ex) {
+            Logger.getLogger(FormularioColaboradorFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    
+    private byte[] convertirABytes(File file) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[16 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+            return baos.toByteArray();
+        }
+    }
+     public void mostrarFotografia(byte[] fotoBytes) {
+        if (fotoBytes != null) {
+            try {
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(fotoBytes);
+
+                Image imagen = new Image(inputStream);
+                imgColaborador.setImage(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No se recibió fotografía para mostrar.");
+        }
+    }
 }

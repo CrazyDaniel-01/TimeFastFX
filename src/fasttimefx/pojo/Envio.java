@@ -36,8 +36,9 @@ public class Envio {
     private String cliente;
     private String conductor;
     private String numeroGuia;
+    private String motivo;
 
-    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calleOrigen, Integer numeroOrigen, String coloniaOrigen, Integer codigoPostalOrigen, String ciudadOrigen, String estadoOrigen, String calleDestino, Integer numeroDestino, String coloniaDestino, Integer codigoPostalDestino, String ciudadDestino, String estadoDestino, String destino, String origen, String noGuia, String costo, String status, String cliente, String conductor, String numeroGuia, List<Envio> enviosRelacionados) {
+    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calleOrigen, Integer numeroOrigen, String coloniaOrigen, Integer codigoPostalOrigen, String ciudadOrigen, String estadoOrigen, String calleDestino, Integer numeroDestino, String coloniaDestino, Integer codigoPostalDestino, String ciudadDestino, String estadoDestino, String destino, String origen, String noGuia, String costo, String status, String cliente, String conductor, String numeroGuia, String motivo, List<Envio> enviosRelacionados) {
         this.idEnvio = idEnvio;
         this.idCliente = idCliente;
         this.idOrigen = idOrigen;
@@ -63,9 +64,22 @@ public class Envio {
         this.cliente = cliente;
         this.conductor = conductor;
         this.numeroGuia = numeroGuia;
+        this.motivo = motivo;
         this.enviosRelacionados = enviosRelacionados;
     }
 
+        
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+    
+    
+
+    
     public Integer getIdEnvio() {
         return idEnvio;
     }

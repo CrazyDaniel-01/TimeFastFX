@@ -93,5 +93,48 @@ public class AsociarConductorDAO {
 
     return msj;
 }
+    public static Mensaje eliminarAsociacion(Integer idAsociacion ) {
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_WS + "asociacionVehicular/eliminarAsociacion/" + idAsociacion;
+        Gson gson = new Gson();
 
+        try {
+            RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url, idAsociacion.toString());
+
+            if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            } else {
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        } catch (Exception e) {
+            msj.setError(true);
+            msj.setMensaje("Error al eliminar la asociacion: " + e.getMessage());
+        }
+
+        return msj;
+    }
+    
+    public static Mensaje asociarEnvio(String jsonAsociacion) {
+    Mensaje msj = new Mensaje();
+    String url = Constantes.URL_WS + "asociacionVehicular/asociarEnvio";
+    Gson gson = new Gson();
+
+    try {
+        System.out.println("JSON Enviado: " + jsonAsociacion); // Debug: Verifica el JSON enviado
+        RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, jsonAsociacion);
+
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+        } else {
+            msj.setError(true);
+            msj.setMensaje("Error en la respuesta del servidor: " + respuesta.getContenido());
+        }
+    } catch (Exception e) {
+        msj.setError(true);
+        msj.setMensaje("Error al conectar con el servidor: " + e.getMessage());
+    }
+
+    return msj;
+}
 }

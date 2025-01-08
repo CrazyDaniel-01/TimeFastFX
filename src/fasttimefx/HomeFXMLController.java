@@ -346,7 +346,15 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             Parent root = loader.load();
             FormularioAsociarConductorFXMLController controlador = loader.getController();
             controlador.inicializarValores(observador, unidad,colaborador);
-            
+            try{
+                Envio envio= tvEnvios.getSelectionModel().getSelectedItem();
+                if(envio!=null){
+                controlador.recibirEnvio(envio); 
+                }
+                
+            }catch(Exception ex){
+                
+            }
 
             Stage escenarioForm = new Stage();
             Scene escenarioFormulario = new Scene(root);
@@ -374,6 +382,22 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         } catch (Exception ex) {
             Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void irFormularioEstado(NotificadorOperaciones observador, Envio envio) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioStatusEnvioFXML.fxml"));
+            Parent root = loader.load();
+            FormularioStatusEnvioFXMLController controlador = loader.getController();
+            controlador.recibirEnvio(this, envio);
+            Stage escenarioForm = new Stage();
+            Scene escenarioFormulario = new Scene(root);
+            escenarioForm.setScene(escenarioFormulario);
+            escenarioForm.setTitle("Gestion de status");
+            escenarioForm.initModality(APPLICATION_MODAL);
+            escenarioForm.showAndWait();
+        } catch (Exception ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        } //To change body of generated methods, choose Tools | Templates.
     }
     private void irFormularioPaquete(NotificadorOperaciones observador, Paquete paquete) {
         try {
@@ -664,6 +688,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colRol.setCellValueFactory(new PropertyValueFactory<>("rol"));
         colLicencia.setCellValueFactory(new PropertyValueFactory<>("NumeroLicencia"));
+        colFoto.setCellValueFactory(new PropertyValueFactory<>("foto"));
 
 
         // Unidades
@@ -761,7 +786,17 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
 
     @FXML
     private void btnActualizarEstado(ActionEvent event) {
+        Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        if(envio!=null){
+            irFormularioEstado(this,envio);
+            
+        }else{
+            Utilidades.mostrarNotificacion("Seleccionar colaborador", "Para editar seleccione primero un colaborador ", Alert.AlertType.WARNING);
+        }
+        
     }
+
+    
     
     
     

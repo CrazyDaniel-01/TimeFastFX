@@ -49,7 +49,6 @@ public class FormularioBajaUnidadFXMLController implements Initializable {
     public void recibirUnidad(NotificadorOperaciones observador,Unidad unidadBaja){
         this.observador=observador;
         this.unidadBaja=unidadBaja;
-        System.out.print(unidadBaja.getIdUnidad());
     }
 
     @FXML
