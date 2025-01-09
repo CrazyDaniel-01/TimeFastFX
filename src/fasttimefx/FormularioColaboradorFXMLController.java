@@ -52,7 +52,7 @@ public class FormularioColaboradorFXMLController implements Initializable {
      */
     private NotificadorOperaciones observador;
     private Colaborador colaboradorEdicion;
-    private File foto;
+   
     private boolean modoEdicion = false;
     private ObservableList<Rol> rol;
     
@@ -95,12 +95,6 @@ public class FormularioColaboradorFXMLController implements Initializable {
     private Label errorRol;
     @FXML
     private Label errorNumLicencia;
-    @FXML
-    private Label errorFoto;
-    @FXML
-    private Button btnFoto;
-    @FXML
-    private ImageView imgColaborador;
     @Override
 public void initialize(URL url, ResourceBundle rb) {
     cargarTiposUsuarios();
@@ -112,6 +106,8 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
         if(colaboradorEdicion!=null){
             modoEdicion=true;
             cargarDatosEdicion();
+            tfNoPersonal.setDisable(true);
+            cbRol.setDisable(true);
         }
 }
     
@@ -125,7 +121,6 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 String nombre=tfNombre.getText();
                 String apellidoPaterno=tfPaterno.getText();
                 String apellidoMaterno=tfMaterno.getText();
-                byte[] fotoBytes= convertirABytes(foto);
                 String password=tfContra.getText();
                 String correo=tfCorreo.getText();
                 String curp=tfCURP.getText();
@@ -134,6 +129,8 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 if(idRol==3){
                     String numeroLicencia=tfNumLicencia.getText();
                     colaborador.setNumeroLicencia(numeroLicencia);
+                }else{
+                    colaborador.setNumeroLicencia("N/A");
                 }
                 colaborador.setNombre(nombre);
                 colaborador.setApellidoMaterno(apellidoMaterno);
@@ -143,7 +140,6 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 colaborador.setCorreo(correo);
                 colaborador.setCurp(curp);
                 colaborador.setIdRol(idRol);
-                colaborador.setFotoBytes(fotoBytes);
             
            guardarDatosColaborador(colaborador);
             }else{
@@ -156,7 +152,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
                 colaborador.setPassword(tfContra.getText());
                 colaborador.setCorreo(tfCorreo.getText());
                 colaborador.setCurp(tfCURP.getText());
-                colaborador.setFotoBytes(this.colaboradorEdicion.getFotoBytes());
+                colaborador.setNumeroLicencia("N/A");
                 colaborador.setIdRol(cbRol.getSelectionModel().getSelectedIndex()+1);
                 if(cbRol.getSelectionModel().getSelectedIndex()==2){
                     colaborador.setNumeroLicencia(tfNumLicencia.getText());
@@ -170,9 +166,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
 
     private void cargarDatosEdicion() {
         colaboradorEdicion.setFotoBytes(ColaboradorDAO.obtenerFoto(this.colaboradorEdicion.getIdColaborador()));
-        if(colaboradorEdicion.getFotoBytes()!=null){
-                mostrarFotografia(colaboradorEdicion.getFotoBytes());
-        }
+        
         tfNombre.setText(this.colaboradorEdicion.getNombre());
         tfPaterno.setText(this.colaboradorEdicion.getApellidoPaterno());
         tfMaterno.setText(this.colaboradorEdicion.getApellidoMaterno());
@@ -182,7 +176,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
         tfNoPersonal.setText(this.colaboradorEdicion.getNoPersonal());
         int posicion= buscarIdRol(this.colaboradorEdicion.getIdRol());
         cbRol.getSelectionModel().select(posicion);
-        if(this.colaboradorEdicion.getIdRol()==2){
+        if(this.colaboradorEdicion.getIdRol()==3){
         tfNumLicencia.setText(this.colaboradorEdicion.getNumeroLicencia());
         }
     }
@@ -231,9 +225,9 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
     }
 
     // Validación del CURP
-    if (tfCURP.getText().isEmpty() || tfCURP.getText().length() > 18) {
+    if (tfCURP.getText().isEmpty() || tfCURP.getText().length() <18||tfCURP.getText().length()>18) {
         validos = false;
-        errorCurp.setText("Por favor ingrese un CURP de hasta 18 caracteres");
+        errorCurp.setText("Por favor ingrese un CURP de 18 caracteres");
     } else {
         errorCurp.setText("");
     }
@@ -250,7 +244,7 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
     if (tfContra.getText().isEmpty() || tfContra.getText().length() <= 8 || 
         !tfContra.getText().matches("^(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$")) {
         validos = false;
-        errorContra.setText("Por favor introduzca una contraseña con \n al menos 8 caracteres, un número y un símbolo");
+        errorContra.setText("Por favor introduzca una contraseña con al menos 8 caracteres, un número \n y un símbolo");
     } else {
         errorContra.setText("");
     }
@@ -322,44 +316,5 @@ public void inicializarValores(NotificadorOperaciones observador,Colaborador col
     return 0;
     }
 
-    @FXML
-    private void clicSubirFoto(ActionEvent event) {
-        try {
-            FileChooser fc = new FileChooser();
-            foto = fc.showOpenDialog(null);
-            Image image =new Image(new FileInputStream(foto));
-            if(foto!=null){
-                imgColaborador.setImage(image);
-                
-            }   } catch (FileNotFoundException ex) {
-            Logger.getLogger(FormularioColaboradorFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
-    private byte[] convertirABytes(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file);
-             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            byte[] buffer = new byte[16 * 1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buffer)) != -1) {
-                baos.write(buffer, 0, bytesRead);
-            }
-            return baos.toByteArray();
-        }
-    }
-     public void mostrarFotografia(byte[] fotoBytes) {
-        if (fotoBytes != null) {
-            try {
-                ByteArrayInputStream inputStream = new ByteArrayInputStream(fotoBytes);
-
-                Image imagen = new Image(inputStream);
-                imgColaborador.setImage(imagen);
-            } catch (Exception e) {
-                System.err.println("Error al cargar la imagen: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("No se recibió fotografía para mostrar.");
-        }
-    }
 }

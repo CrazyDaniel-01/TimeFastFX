@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fasttimefx;
 
 import Utilidades.Utilidades;
@@ -18,7 +14,13 @@ import fasttimefx.pojo.Envio;
 import fasttimefx.pojo.Mensaje;
 import fasttimefx.pojo.Paquete;
 import fasttimefx.pojo.Unidad;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -37,12 +39,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import static javafx.stage.Modality.APPLICATION_MODAL;
 import javafx.stage.Stage;
 import observador.NotificadorOperaciones;
@@ -91,7 +98,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     private Button btnEnvios;
     @FXML
     private Button btnPaquetes;
-  
+    
     @FXML
     private TableColumn colNombre;
     @FXML
@@ -153,7 +160,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     @FXML
     private TableColumn colDireccionC;
     @FXML
-    private TableColumn colFoto;
+    private TableColumn colFotografia;
     @FXML
     private Button btnEditarUnidad;
     @FXML
@@ -196,7 +203,6 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     private TableColumn colEstado;
     
    
-
     /**
      * Initializes the controller class.
      */
@@ -204,6 +210,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarDatos();
+        agregarColumnaFotografia();
     }    
     @FXML
     public void panelClientes(ActionEvent actionEvent){
@@ -229,8 +236,6 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
 
     @Override
     public void notificarOperacion(String tipo, String nombre) {
-        System.out.println("Tipo operacion: "+tipo);
-        System.out.println("Nombre Colaborador: "+nombre);
         recargarTablaColaboradores();
         recargarTablaUnidades();
         recargarTablaClientes();
@@ -256,8 +261,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             colaboradores.addAll(resultados);
             tvColaborador.setItems(colaboradores);
         } else {
-            System.out.println("No se encontraron colaboradores con ese nombre.");
-        }
+            }
     }
     @FXML
     public void buscarCliente() {
@@ -268,8 +272,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
             clientes.addAll(resultados);
             tvCliente.setItems(clientes);
         } else {
-            System.out.println("No se encontraron colaboradores con ese nombre.");
-        }
+            }
     }
     
     @FXML
@@ -281,8 +284,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         unidades.addAll(resultados);
         tvUnidad.setItems(unidades);
     } else {
-        System.out.println("No se encontraron unidades con ese nombre.");
-    }
+       }
 }
 
     
@@ -472,8 +474,6 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     @FXML
     private void btnEditarEnvio(ActionEvent event) {
         Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
-        System.out.println(envio.getOrigen());
-        System.out.println(envio.getCalleOrigen());
         if (envio != null) {
             irFormularioEnvio(this,envio);
         } else {
@@ -688,8 +688,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colRol.setCellValueFactory(new PropertyValueFactory<>("rol"));
         colLicencia.setCellValueFactory(new PropertyValueFactory<>("NumeroLicencia"));
-        colFoto.setCellValueFactory(new PropertyValueFactory<>("foto"));
-
+        colFotografia.setCellValueFactory(new PropertyValueFactory<>("fotoBase64"));
 
         // Unidades
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
@@ -723,7 +722,7 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         colTelefonoC.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         colCorreoC.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colDireccionC.setCellValueFactory(new PropertyValueFactory<>("direccion"));
-        colFoto.setCellValueFactory(new PropertyValueFactory<>("fotoBase64"));
+        
     
 }
 
@@ -798,6 +797,127 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
 
     
     
+       
+ private byte[] convertirArchivoABytes(File file) {
+    try (InputStream inputStream = new java.io.FileInputStream(file)) {
+        byte[] buffer = new byte[(int) file.length()];
+        inputStream.read(buffer);
+        return buffer;
+    } catch (IOException e) {
+        e.printStackTrace();
+        Utilidades.mostrarNotificacion("Error", "No se pudo leer el archivo.", Alert.AlertType.ERROR);
+        return null;
+    }
+}
+
+
     
-    
+private void guardarImagen(int idColaborador, File fotografia) {
+    try {
+        // Leer los bytes directamente del archivo de la imagen
+        byte[] imagenBytes = Files.readAllBytes(fotografia.toPath());
+        // Enviar los bytes al DAO
+        Mensaje mensaje = ColaboradorDAO.cargarImagen(idColaborador, imagenBytes);
+
+        if (!mensaje.isError()) {
+            Utilidades.mostrarNotificacion("Éxito", "La imagen se guardó correctamente.", Alert.AlertType.INFORMATION);
+        } else {
+            Utilidades.mostrarNotificacion("Error", "No se pudo guardar la imagen: " + mensaje.getMensaje(), Alert.AlertType.ERROR);
+        }
+    } catch (IOException e) {
+        Utilidades.mostrarNotificacion("Error", "No se pudo leer el archivo de imagen.", Alert.AlertType.ERROR);
+    }
+}
+
+
+
+
+private Image visualizarImagen(int idColaborador) {
+    try {
+        byte[] imagenBytes = ColaboradorDAO.descargarImagen(idColaborador);
+        if (imagenBytes != null && imagenBytes.length > 0) {
+            InputStream inputStream = new ByteArrayInputStream(imagenBytes);
+            return new Image(inputStream); // Crear imagen desde InputStream
+        } else {
+            Utilidades.mostrarNotificacion("Sin imagen", "No se encontró una imagen para este colaborador.", Alert.AlertType.WARNING);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        Utilidades.mostrarNotificacion("Error", "No se pudo visualizar la imagen.", Alert.AlertType.ERROR);
+    }
+    return null;
+}
+
+private void agregarColumnaFotografia() {
+    TableColumn<Colaborador, Void> colFotografia = new TableColumn<>("Acciones");
+
+    colFotografia.setCellFactory(param -> new TableCell<Colaborador, Void>() {
+        private final Button btnGuardar = new Button("Guardar");
+        private final Button btnVisualizar = new Button("Visualizar");
+        private final HBox hBox = new HBox(5, btnGuardar, btnVisualizar);
+
+        {
+            // Configuración inicial de los botones
+            hBox.setStyle("-fx-alignment: center;"); // Centra los botones en la celda
+            btnGuardar.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;"); // Estilo del botón Guardar
+            btnVisualizar.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white;"); // Estilo del botón Visualizar
+
+            // Acción del botón "Guardar"
+            btnGuardar.setOnAction(event -> {
+                Colaborador colaborador = getTableView().getItems().get(getIndex());
+                if (colaborador != null) {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
+                    File archivoSeleccionado = fileChooser.showOpenDialog(null);
+
+                    if (archivoSeleccionado != null) {
+                        guardarImagen(colaborador.getIdColaborador(), archivoSeleccionado);
+                        Utilidades.mostrarNotificacion("Éxito", "Imagen guardada correctamente.", Alert.AlertType.INFORMATION);
+                    }
+                }
+            });
+
+            // Acción del botón "Visualizar"
+            btnVisualizar.setOnAction(event -> {
+                Colaborador colaborador = getTableView().getItems().get(getIndex());
+                if (colaborador != null) {
+                    Image imagen = visualizarImagen(colaborador.getIdColaborador());
+                    if (imagen != null) {
+                        mostrarImagenEnVentana(imagen, colaborador.getNombre());
+                    } else {
+                        Utilidades.mostrarNotificacion("Sin imagen", "No hay una imagen asociada a este colaborador.", Alert.AlertType.WARNING);
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || getIndex() >= getTableView().getItems().size()) {
+                setGraphic(null); // Limpia la celda si está vacía
+            } else {
+                setGraphic(hBox); // Muestra los botones en la celda
+            }
+        }
+    });
+
+    // Agregar la columna al TableView
+    tvColaborador.getColumns().add(colFotografia);
+}
+
+
+private void mostrarImagenEnVentana(Image imagen, String nombreColaborador) {
+    ImageView imageView = new ImageView(imagen);
+    imageView.setFitWidth(400);
+    imageView.setPreserveRatio(true);
+
+    VBox vbox = new VBox(imageView);
+    vbox.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+    Stage stage = new Stage();
+    stage.setTitle("Fotografía de " + nombreColaborador);
+    stage.setScene(new Scene(vbox, 450, 450));
+    stage.show();
+}
 }

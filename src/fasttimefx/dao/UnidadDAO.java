@@ -44,7 +44,6 @@ public class UnidadDAO {
         Gson gson= new Gson();
             try{
                 String parametros=gson.toJson(unidad);
-                System.out.print(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
                 if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
                     msj=gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -67,7 +66,6 @@ public class UnidadDAO {
 
             try {
                 String parametros = gson.toJson(unidad);
-                System.out.println(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
                 if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                     msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -85,7 +83,6 @@ public class UnidadDAO {
       public static List<Unidad> buscarUnidadesPorMarca(String marca) {
     List<Unidad> unidades = null;
     String url = Constantes.URL_WS + "unidad/obtenerUnidadMarca/" + marca;
-    System.out.println(url);
     RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
 
     if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {

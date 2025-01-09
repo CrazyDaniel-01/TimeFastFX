@@ -26,10 +26,7 @@ public class RolDAO {
         String url = Constantes.URL_WS + "rol/obtenerRol";
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
 
-        System.out.println("URL de solicitud: " + url);
-        System.out.println("Código de respuesta: " + respuesta.getCodigoRespuesta());
-        System.out.println("Contenido recibido: " + respuesta.getContenido());
-
+        
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();
             try {
@@ -37,18 +34,18 @@ public class RolDAO {
                 rol = gson.fromJson(respuesta.getContenido(), tipoListaRol);
 
                 if (rol != null) {
-                    System.out.println("Roles cargados desde el JSON:");
+                    
                     for (Rol r : rol) {
-                        System.out.println("ID: " + r.getIdRol() + ", Nombre: " + r.getDescripcionRol());
+                        
                     }
                 } else {
-                    System.out.println("La lista de roles es nula después de la conversión.");
+                    
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Error en la solicitud: Código " + respuesta.getCodigoRespuesta());
+            
         }
 
         return rol; 

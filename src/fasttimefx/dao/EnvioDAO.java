@@ -59,8 +59,7 @@ public class EnvioDAO {
     String url = Constantes.URL_WS + "envio/registrarEnvio"; // Cambiamos la URL para "envio"
     Gson gson = new Gson();
     try {
-        String parametros = gson.toJson(envio); // Cambiamos el objeto serializado a "envio"
-        System.out.print(parametros);
+        String parametros = gson.toJson(envio); 
         RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -80,8 +79,7 @@ public static Mensaje actualizarEnvio(Envio envio) {
     String url = Constantes.URL_WS + "envio/editarEnvio"; // Cambiamos la URL para "envio"
     Gson gson = new Gson();
     try {
-        String parametros = gson.toJson(envio); // Cambiamos el objeto serializado a "envio"
-        System.out.print(parametros);
+        String parametros = gson.toJson(envio);
         RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -101,8 +99,7 @@ public static Mensaje actualizarEstadoEnvio(Envio envio) {
     String url = Constantes.URL_WS + "envio/cambiarEstatus"; // Cambiamos la URL para "envio"
     Gson gson = new Gson();
     try {
-        String parametros = gson.toJson(envio); // Cambiamos el objeto serializado a "envio"
-        System.out.print(parametros);
+        String parametros = gson.toJson(envio);
         RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -123,7 +120,6 @@ public static Mensaje actualizarEstadoEnvio(Envio envio) {
             Mensaje msj = new Mensaje();
             String url = Constantes.URL_WS + "envio/eliminarEnvio/"+idEnvio;
             Gson gson = new Gson();
-            System.out.println(url);
             try {
                 RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url, idEnvio.toString());
 

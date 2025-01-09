@@ -25,7 +25,6 @@ public class BajaUnidadDAO {
 
             try {
                 String parametros = gson.toJson(bajaUnidad);
-                System.out.println(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
                 if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                     msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);

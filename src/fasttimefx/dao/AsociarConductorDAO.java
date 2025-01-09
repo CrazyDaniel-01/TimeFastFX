@@ -76,8 +76,7 @@ public class AsociarConductorDAO {
     String url = Constantes.URL_WS + "asociacionVehicular/registrarAsociacion";
     Gson gson = new Gson();
 
-    try {
-        System.out.println("JSON Enviado: " + jsonAsociacion); // Debug: Verifica el JSON enviado
+    try { // Debug: Verifica el JSON enviado
         RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, jsonAsociacion);
 
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
@@ -121,8 +120,7 @@ public class AsociarConductorDAO {
     Gson gson = new Gson();
 
     try {
-        System.out.println("JSON Enviado: " + jsonAsociacion); // Debug: Verifica el JSON enviado
-        RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, jsonAsociacion);
+       RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, jsonAsociacion);
 
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);

@@ -23,7 +23,6 @@ public class LoginDAO {
         String parametros = String.format("noPersonal=%s&password=%s",noPersonal,password);
         RespuestaHTTP respuestaWS = ConexionWS.peticionPOST(urlServicio, parametros);
         if(respuestaWS.getCodigoRespuesta()== HttpURLConnection.HTTP_OK){
-            System.out.println("JSON "+respuestaWS.getContenido());
             Gson gson = new Gson();
             respuestaLogin =gson.fromJson(respuestaWS.getContenido(), Login.class);
         }else{

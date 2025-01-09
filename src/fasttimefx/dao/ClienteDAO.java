@@ -48,8 +48,6 @@ public class ClienteDAO {
 
         try {
             String parametros = gson.toJson(cliente);
-            System.out.print(parametros);
-            System.out.print(parametros);
             RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
 
             if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
@@ -74,7 +72,6 @@ public class ClienteDAO {
 
     try {
         String parametros = gson.toJson(cliente);
-        System.out.println(parametros);
         RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -115,7 +112,6 @@ public class ClienteDAO {
     public static List<Cliente> buscarClientesPorNombre(String nombre) {
         List<Cliente> clientes = null;
         String url = Constantes.URL_WS + "cliente/obtenerClienteNombre/" + nombre;
-        System.out.println(url);
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
 
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {

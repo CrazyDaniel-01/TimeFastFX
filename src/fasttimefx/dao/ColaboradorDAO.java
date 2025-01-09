@@ -8,6 +8,7 @@ package fasttimefx.dao;
 import Utilidades.Constantes;
 import Utilidades.Utilidades;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import fasttimefx.modelo.ConexionWS;
 import fasttimefx.pojo.Colaborador;
@@ -17,7 +18,14 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.util.Base64;
 import java.util.List;
-import javafx.scene.control.Alert;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.util.Base64;
+import java.util.List;
 
 /**
  *
@@ -47,7 +55,6 @@ public class ColaboradorDAO {
         Gson gson= new Gson();
             try{
                 String parametros=gson.toJson(colaborador);
-                System.out.print(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
                 if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
                     msj=gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -69,7 +76,6 @@ public class ColaboradorDAO {
 
             try {
                 String parametros = gson.toJson(colaborador);
-                System.out.println(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
                 if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                     msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -106,7 +112,6 @@ public static Mensaje eliminarColaborador(Integer idColaborador) {
     public static List<Colaborador> buscarColaboradoresPorNombre(String nombre) {
     List<Colaborador> colaboradores = null;
     String url = Constantes.URL_WS + "colaborador/obtenerColaboradorNombre/" + nombre;
-    System.out.println(url);
     RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
 
     if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
@@ -140,4 +145,56 @@ public static Mensaje eliminarColaborador(Integer idColaborador) {
         }
         return foto;
     }
+ public static Mensaje cargarImagen(int idColaborador, byte[] fotografia) {
+    Mensaje msj = new Mensaje();
+    String url = Constantes.URL_WS + "colaborador/subirFoto/" + idColaborador;
+
+    try {
+        RespuestaHTTP respuesta = ConexionWS.peticionPUTFoto(url, fotografia);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+        } else {
+            msj.setError(true);
+            msj.setMensaje("Error al subir la imagen: Código " + respuesta.getCodigoRespuesta());
+        }
+    } catch (Exception e) {
+        msj.setError(true);
+        msj.setMensaje("Error al subir la imagen: " + e.getMessage());
+    }
+    return msj;
+}
+
+
+public static byte[] descargarImagen(int idColaborador) {
+    String url = Constantes.URL_WS + "colaborador/obtenerFoto/" + idColaborador;
+
+    try {
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(respuesta.getContenido(), JsonObject.class);
+
+            if (jsonObject.has("fotoBase64")) {
+                // Elimina caracteres no válidos como saltos de línea
+                String base64Image = jsonObject.get("fotoBase64").getAsString().replaceAll("\\s", "");
+                return Base64.getDecoder().decode(base64Image);
+            } else {
+               
+            }
+        } else {
+            
+        }
+    } catch (IllegalArgumentException e) {
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return null;
+}
+
+
+
+
 }

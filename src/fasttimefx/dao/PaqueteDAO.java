@@ -45,7 +45,6 @@ public class PaqueteDAO {
 
             try {
                 String parametros = gson.toJson(paquete);
-                System.out.println(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPUTJSON(url, parametros);
                 if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                     msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
@@ -63,7 +62,6 @@ public class PaqueteDAO {
             Mensaje msj = new Mensaje();
             String url = Constantes.URL_WS + "paquete/eliminarPaquete/"+idPaquete;
             Gson gson = new Gson();
-            System.out.println(url);
             try {
                 RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url, idPaquete.toString());
 
@@ -86,7 +84,6 @@ public class PaqueteDAO {
         Gson gson= new Gson();
             try{
                 String parametros=gson.toJson(paquete);
-                System.out.print(parametros);
                 RespuestaHTTP respuesta = ConexionWS.peticionPOSTJSON(url, parametros);
                 if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
                     msj=gson.fromJson(respuesta.getContenido(), Mensaje.class);
