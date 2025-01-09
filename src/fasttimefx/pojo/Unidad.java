@@ -124,5 +124,16 @@ public class Unidad {
     public String toString() {
     return this.marca;
 }
+<<<<<<< Updated upstream
+}
+>>>>>>> Stashed changes
+=======
+ 
+    public Unidad(Integer idUnidad) {
+    this.idUnidad = idUnidad;
+}
+
+    
+    
 }
 >>>>>>> Stashed changes

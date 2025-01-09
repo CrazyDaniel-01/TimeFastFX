@@ -20,6 +20,24 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import observador.NotificadorOperaciones;
 import com.google.gson.Gson;
+<<<<<<< Updated upstream
+=======
+import fasttimefx.pojo.Envio;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import static javafx.stage.Modality.APPLICATION_MODAL;
+
+>>>>>>> Stashed changes
 
 public class FormularioAsociarConductorFXMLController implements Initializable {
 
@@ -38,6 +56,25 @@ public class FormularioAsociarConductorFXMLController implements Initializable {
     private Label errorColaborador;
     @FXML
     private Label errorUnidad;
+<<<<<<< Updated upstream
+=======
+    @FXML
+    private TableView<AsociacionVehicular> tvConductores;
+    @FXML
+    private TableColumn colUnidad;
+    @FXML
+    private TableColumn colConductor;
+    @FXML
+    private TableColumn colEnvio;
+    @FXML
+    private Button btnAsociarConductor;
+    @FXML
+    private Button btnEliminarAsociacion;
+    @FXML
+    private Button btnEditarAsociacion;
+    @FXML
+    private Button btnAsociarEnvio;
+>>>>>>> Stashed changes
 
    
     @Override
@@ -202,5 +239,84 @@ private void guardarDatos(Integer idConductor, Integer idUnidad) {
         Stage stage = (Stage) cbColaborador.getScene().getWindow();
         stage.close();
     }
+<<<<<<< Updated upstream
+=======
+
+    private void configurarTabla() {
+        colUnidad.setCellValueFactory(new PropertyValueFactory<>("unidad"));
+        colConductor.setCellValueFactory(new PropertyValueFactory<>("conductor"));
+        colEnvio.setCellValueFactory(new PropertyValueFactory<>("envioAsociado"));
+        }
+
+    private void cargarTabla() {
+        tvConductores.getItems().clear();
+        asociaciones= FXCollections.observableArrayList();
+        List<AsociacionVehicular> listAsociaciones = AsociarConductorDAO.obtenerAsociaciones();
+        if (listAsociaciones != null) {
+            asociaciones.addAll(listAsociaciones);
+            tvConductores.setItems(asociaciones);
+        } else {
+            Utilidades.mostrarNotificacion("Error", "No se pudo cargar la información de colaboradores.", Alert.AlertType.ERROR);
+        }
+    }
+ 
+
+
+    @FXML
+private void clicEditarAsociacion(ActionEvent event) {
+    AsociacionVehicular seleccionada = tvConductores.getSelectionModel().getSelectedItem();
+    if (seleccionada != null) {
+        try {
+            // Cargar el FXML del formulario de edición
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioEditarAsociacionFXML.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador del formulario de edición
+            FormularioEditarAsociacionFXMLController controlador = loader.getController();
+
+            // Inicializar valores en el controlador del formulario de edición
+            controlador.inicializarValores(
+                new Colaborador(seleccionada.getIdConductor()), 
+                new Unidad(seleccionada.getIdUnidad())
+            );
+
+            // Crear un nuevo escenario para mostrar el formulario
+            Stage stage = new Stage();
+            stage.initModality(APPLICATION_MODAL); // Bloquea la ventana principal
+            stage.setTitle("Editar Asociación");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Refrescar la tabla después de cerrar la ventana
+            cargarTabla();
+        } catch (IOException ex) {
+            Logger.getLogger(FormularioAsociarConductorFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            Utilidades.mostrarNotificacion(
+                "Error",
+                "No se pudo cargar el formulario de edición.",
+                Alert.AlertType.ERROR
+            );
+        }
+    } else {
+        Utilidades.mostrarNotificacion(
+            "Edición no válida",
+            "Seleccione una asociación para editar.",
+            Alert.AlertType.WARNING
+        );
+    }
+}
+
+    @FXML
+    private void clicEliminarAsociacion(ActionEvent event) {
+        
+       
+    }
+    @FXML
+    private void clicAsociarEnvio(ActionEvent event) {
+    }
+
+
+  
+>>>>>>> Stashed changes
 }
  

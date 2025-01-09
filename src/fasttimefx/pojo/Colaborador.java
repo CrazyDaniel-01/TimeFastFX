@@ -27,7 +27,24 @@ public class Colaborador {
     private String noLicencia;
     private String noPersonal;
     private Integer idConductor;
+<<<<<<< Updated upstream
     private String numeroLicencia;
+=======
+    private String telefono;
+    private String fotografia;
+
+    public String getFotografia() {
+        return fotografia;
+    }
+
+    public void setFotografia(String fotografia) {
+        this.fotografia = fotografia;
+    }
+
+    public Colaborador(String fotografia) {
+        this.fotografia = fotografia;
+    }
+>>>>>>> Stashed changes
 
     // Lista adicional de colaboradores (si es necesario para relaciones o lógica interna)
     private List<Colaborador> colaboradores;
@@ -179,6 +196,9 @@ public class Colaborador {
     @Override
     public String toString() {
     return this.nombre; // Reemplaza "nombre" con el atributo que desees mostrar
+}
+public Colaborador(Integer idConductor) {
+    this.idConductor = idConductor;
 }
 
 }

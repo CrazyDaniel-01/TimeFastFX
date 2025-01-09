@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fasttimefx.FormularioEditarAsociacionFXMLController">
+    <children>
+        <!-- Título de la sección -->
+        <Label alignment="CENTER" prefHeight="36.0" style="-fx-background-color: #61449E; -fx-font-family: Arial; -fx-font-size: 18px;" text="Conductores" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+
+        <!-- Contenedor para los campos de formulario -->
+        <VBox prefHeight="239.0" prefWidth="516.0" spacing="16.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+            <children>
+                <!-- Fila de ComboBoxes -->
+                <HBox spacing="30.0">
+                    <children>
+                        <!-- Unidad -->
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label fx:id="errorUnidad" style="-fx-font-family: Arial; -fx-font-size: 18px;" text="Unidades" />
+                                <ComboBox fx:id="cbUnidad" prefHeight="25.0" prefWidth="414.0" promptText="Seleccione una unidad" />
+                            </children>
+                        </VBox>
+                        
+                        <!-- Conductor -->
+                        <VBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <Label fx:id="errorColaborador" style="-fx-font-family: Arial; -fx-font-size: 18px;" text="Conductores" />
+                                <ComboBox fx:id="cbColaborador" prefHeight="25.0" prefWidth="412.0" promptText="Seleccione un conductor" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                
+                <!-- Espaciado -->
+                <HBox spacing="10.0" />
+            </children>
+        </VBox>
+
+        <!-- Botones de acción -->
+        <HBox alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
+            <children>
+                <Button fx:id="btnGuardarAsociacion" onAction="#clicGuardarAsociacion" style="-fx-font-family: Arial; -fx-font-size: 18px;" stylesheets="@../Estilos/EstilosBotones.css" text="Guardar Asociación" textFill="WHITE" />
+                <Button fx:id="btnCancelarAsociacion" onAction="#clicCancelarAsociacion" style="-fx-font-family: Arial; -fx-font-size: 18px;" stylesheets="@../Estilos/EstilosBotones.css" text="Cancelar" textFill="WHITE" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

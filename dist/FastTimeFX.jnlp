@@ -9,9 +9,13 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <jar href="FastTimeFX.jar" size="407632" download="eager" />
 =======
     <jar href="FastTimeFX.jar" size="458038" download="eager" />
+>>>>>>> Stashed changes
+=======
+    <jar href="FastTimeFX.jar" size="484697" download="eager" />
 >>>>>>> Stashed changes
     <jar href="lib\gson-2.9.1.jar" size="265030" download="eager" />
   </resources>

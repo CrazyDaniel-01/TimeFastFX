@@ -335,13 +335,19 @@
             </HBox>
             <TableView fx:id="tvColaborador" prefHeight="607.0" prefWidth="1259.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0">
               <columns>
-                  <TableColumn fx:id="colFoto" prefWidth="75.0" text="Fotografia" />
+                  
+                
                 <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
                 <TableColumn fx:id="colApellidoP" prefWidth="75.0" text="Apellido Paterno" />
                   <TableColumn fx:id="colApellidoM" prefWidth="75.0" text="Apellido Materno" />
                   <TableColumn fx:id="colCURP" prefWidth="75.0" text="CURP" />
                   <TableColumn fx:id="colCorreo" prefWidth="75.0" text="Correo" />
                   <TableColumn fx:id="colRol" prefWidth="75.0" text="Rol" />
+<<<<<<< Updated upstream
+=======
+                  <TableColumn fx:id="colLicencia" prefWidth="75.0" text="Licencia" />
+                  <TableColumn fx:id="colFotografia" prefWidth="150.0" text="Fotografía" />
+>>>>>>> Stashed changes
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

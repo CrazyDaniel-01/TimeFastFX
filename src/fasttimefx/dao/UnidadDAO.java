@@ -22,7 +22,7 @@ import java.util.List;
  * @author afs30
  */
 public class UnidadDAO {
-           public static List<Unidad>obtenerUnidad(){
+        public static List<Unidad>obtenerUnidad(){
         List<Unidad>unidades = null;
         String url =Constantes.URL_WS+ "unidad/obtenerUnidad";
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);

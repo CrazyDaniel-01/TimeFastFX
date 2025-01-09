@@ -16,7 +16,17 @@ import fasttimefx.pojo.Colaborador;
 import fasttimefx.pojo.Envio;
 import fasttimefx.pojo.Paquete;
 import fasttimefx.pojo.Unidad;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+<<<<<<< Updated upstream
+=======
+import java.nio.file.Files;
+import java.util.Base64;
+import java.util.HashSet;
+>>>>>>> Stashed changes
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -26,11 +36,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+<<<<<<< Updated upstream
+=======
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
+>>>>>>> Stashed changes
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+<<<<<<< Updated upstream
+=======
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import static javafx.stage.Modality.APPLICATION_MODAL;
+import javafx.stage.Stage;
+>>>>>>> Stashed changes
 import observador.NotificadorOperaciones;
 
 /**
@@ -144,10 +168,14 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     @FXML
     private TableColumn colDireccionC;
     @FXML
+<<<<<<< Updated upstream
     private TableColumn colFoto;
 <<<<<<< Updated upstream
    
 =======
+=======
+    private TableColumn colFotografia;
+>>>>>>> Stashed changes
     @FXML
     private Button btnEditarUnidad;
     @FXML
@@ -195,6 +223,15 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarDatos();
+<<<<<<< Updated upstream
+=======
+        agregarColumnaFotografia();
+    }    
+    @FXML
+    public void panelClientes(ActionEvent actionEvent){
+        pnlClientes.toFront();
+        
+>>>>>>> Stashed changes
     }
 
     @FXML
@@ -617,7 +654,13 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
         colTelefonoC.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         colCorreoC.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colDireccionC.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+<<<<<<< Updated upstream
         colFoto.setCellValueFactory(new PropertyValueFactory<>("fotoBase64"));
+=======
+        colFotografia.setCellValueFactory(new PropertyValueFactory<>("fotoBase64"));
+    
+}
+>>>>>>> Stashed changes
 
 <<<<<<< Updated upstream
     
@@ -705,7 +748,133 @@ public class HomeFXMLController implements Initializable, NotificadorOperaciones
 
 <<<<<<< Updated upstream
     
+<<<<<<< Updated upstream
     
 =======
+>>>>>>> Stashed changes
+=======
+ private byte[] convertirArchivoABytes(File file) {
+    try (InputStream inputStream = new java.io.FileInputStream(file)) {
+        byte[] buffer = new byte[(int) file.length()];
+        inputStream.read(buffer);
+        return buffer;
+    } catch (IOException e) {
+        e.printStackTrace();
+        Utilidades.mostrarNotificacion("Error", "No se pudo leer el archivo.", Alert.AlertType.ERROR);
+        return null;
+    }
+}
+
+
+    
+private void guardarImagen(int idColaborador, File fotografia) {
+    try {
+        // Leer los bytes directamente del archivo de la imagen
+        byte[] imagenBytes = Files.readAllBytes(fotografia.toPath());
+        // Enviar los bytes al DAO
+        Mensaje mensaje = ColaboradorDAO.cargarImagen(idColaborador, imagenBytes);
+
+        if (!mensaje.isError()) {
+            Utilidades.mostrarNotificacion("Éxito", "La imagen se guardó correctamente.", Alert.AlertType.INFORMATION);
+        } else {
+            Utilidades.mostrarNotificacion("Error", "No se pudo guardar la imagen: " + mensaje.getMensaje(), Alert.AlertType.ERROR);
+        }
+    } catch (IOException e) {
+        System.err.println("Error al leer el archivo de imagen: " + e.getMessage());
+        Utilidades.mostrarNotificacion("Error", "No se pudo leer el archivo de imagen.", Alert.AlertType.ERROR);
+    }
+}
+
+
+
+
+private Image visualizarImagen(int idColaborador) {
+    try {
+        byte[] imagenBytes = ColaboradorDAO.descargarImagen(idColaborador);
+        if (imagenBytes != null && imagenBytes.length > 0) {
+            InputStream inputStream = new ByteArrayInputStream(imagenBytes);
+            return new Image(inputStream); // Crear imagen desde InputStream
+        } else {
+            Utilidades.mostrarNotificacion("Sin imagen", "No se encontró una imagen para este colaborador.", Alert.AlertType.WARNING);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        Utilidades.mostrarNotificacion("Error", "No se pudo visualizar la imagen.", Alert.AlertType.ERROR);
+    }
+    return null;
+}
+
+private void agregarColumnaFotografia() {
+    TableColumn<Colaborador, Void> colFotografia = new TableColumn<>("Fotografía");
+
+    colFotografia.setCellFactory(param -> new TableCell<Colaborador, Void>() {
+        private final Button btnGuardar = new Button("Guardar");
+        private final Button btnVisualizar = new Button("Visualizar");
+        private final HBox hBox = new HBox(5, btnGuardar, btnVisualizar);
+
+        {
+            // Configuración inicial de los botones
+            hBox.setStyle("-fx-alignment: center;"); // Centra los botones en la celda
+            btnGuardar.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;"); // Estilo del botón Guardar
+            btnVisualizar.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white;"); // Estilo del botón Visualizar
+
+            // Acción del botón "Guardar"
+            btnGuardar.setOnAction(event -> {
+                Colaborador colaborador = getTableView().getItems().get(getIndex());
+                if (colaborador != null) {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
+                    File archivoSeleccionado = fileChooser.showOpenDialog(null);
+
+                    if (archivoSeleccionado != null) {
+                        guardarImagen(colaborador.getIdColaborador(), archivoSeleccionado);
+                        Utilidades.mostrarNotificacion("Éxito", "Imagen guardada correctamente.", Alert.AlertType.INFORMATION);
+                    }
+                }
+            });
+
+            // Acción del botón "Visualizar"
+            btnVisualizar.setOnAction(event -> {
+                Colaborador colaborador = getTableView().getItems().get(getIndex());
+                if (colaborador != null) {
+                    Image imagen = visualizarImagen(colaborador.getIdColaborador());
+                    if (imagen != null) {
+                        mostrarImagenEnVentana(imagen, colaborador.getNombre());
+                    } else {
+                        Utilidades.mostrarNotificacion("Sin imagen", "No hay una imagen asociada a este colaborador.", Alert.AlertType.WARNING);
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || getIndex() >= getTableView().getItems().size()) {
+                setGraphic(null); // Limpia la celda si está vacía
+            } else {
+                setGraphic(hBox); // Muestra los botones en la celda
+            }
+        }
+    });
+
+    // Agregar la columna al TableView
+    tvColaborador.getColumns().add(colFotografia);
+}
+
+
+private void mostrarImagenEnVentana(Image imagen, String nombreColaborador) {
+    ImageView imageView = new ImageView(imagen);
+    imageView.setFitWidth(400);
+    imageView.setPreserveRatio(true);
+
+    VBox vbox = new VBox(imageView);
+    vbox.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+    Stage stage = new Stage();
+    stage.setTitle("Fotografía de " + nombreColaborador);
+    stage.setScene(new Scene(vbox, 450, 450));
+    stage.show();
+}
 >>>>>>> Stashed changes
 }

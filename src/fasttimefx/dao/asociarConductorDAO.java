@@ -56,6 +56,38 @@ public class asociarConductorDAO {
         return unidades;
     }
         
+        
+        
+        public static List<Colaborador>obtenerColaborador(){
+        List<Colaborador>colaboradores = null;
+        String url =Constantes.URL_WS+ "colaborador/obtenerColaborador";
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            try{
+                Type tipoListaColaborador = new TypeToken<List<Colaborador>>(){}.getType();
+                colaboradores = gson.fromJson(respuesta.getContenido(),tipoListaColaborador);
+            }catch(Exception e){           
+                e.printStackTrace();         
+            }
+        }
+        return colaboradores;
+    }
+        public static List<Unidad>obtenerUnidad(){
+        List<Unidad>unidades = null;
+        String url =Constantes.URL_WS+ "unidad/obtenerUnidad";
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        if(respuesta.getCodigoRespuesta()==HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            try{
+                Type tipoListaUnidad = new TypeToken<List<Unidad>>(){}.getType();
+                unidades = gson.fromJson(respuesta.getContenido(),tipoListaUnidad);
+            }catch(Exception e){           
+                e.printStackTrace();         
+            }
+        }
+        return unidades;
+    }
  public static Mensaje registrarAsociacion(String jsonAsociacion) {
     Mensaje msj = new Mensaje();
     String url = Constantes.URL_WS + "asociacionVehicular/registrarAsociacion";
